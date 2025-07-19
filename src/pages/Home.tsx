@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Download, Star } from "lucide-react";
 import { Link } from "react-router-dom";
-import kushHeadshot from "@/assets/kush-headshot.jpg";
+import kushHeadshot from "../../image.jpg";
 
 export default function Home() {
   const coreValues = ["Ambition", "Discipline", "Honesty"];
@@ -17,19 +17,13 @@ export default function Home() {
           <div className="flex-1 space-y-6">
             <div className="space-y-2">
               <h1 className="text-4xl lg:text-5xl font-bold text-foreground">
-                Welcome to My
-                <span className="text-primary"> ePortfolio</span>
+                Kush Morjaria
+                <span className="text-primary block text-2xl font-medium mt-2">Technical Systems Analyst</span>
               </h1>
               <p className="text-xl text-muted-foreground">
-                Showcasing my journey as a Software Developer and IT Professional
+                Hi, I’m Kush Morjaria, a Technical Systems Analyst co‑op at RBC who blends AI‑driven automation with enterprise finance solutions. Passionate about turning complex data into secure, scalable insights, I build production‑ready pipelines and intelligent dashboards that drive real‑world impact.
               </p>
             </div>
-            
-            <p className="text-lg leading-relaxed text-foreground">
-              I'm Kush Morjaria, a passionate technology professional currently pursuing my studies 
-              while gaining hands-on experience at RBC. This portfolio documents my academic achievements, 
-              professional growth, and commitment to excellence in the field of information technology.
-            </p>
 
             <div className="flex flex-wrap gap-3">
               <Link to="/career">
@@ -61,33 +55,26 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About Me Section */}
-      <section className="space-y-6">
-        <h2 className="text-3xl font-bold text-foreground">About Me</h2>
-        
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <Card className="shadow-card">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <span>Professional Background</span>
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <p className="text-muted-foreground leading-relaxed">
-                Currently pursuing my undergraduate degree while working as an IT Support Specialist 
-                at RBC, one of Canada's leading financial institutions. My role involves supporting 
-                critical infrastructure, developing automation solutions, and contributing to 
-                data-driven decision making.
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                I specialize in Python automation, infrastructure monitoring with Grafana, 
-                and implementing enterprise solutions using Ansible and HashiCorp Vault. 
-                My recent work includes developing AI-powered workflows and proof-of-concept 
-                integrations with HubSpot CRM.
-              </p>
-            </CardContent>
-          </Card>
+      {/* About Me Section - Highlighted */}
+      <section className="bg-gradient-to-br from-accent/10 to-secondary/10 border-l-4 border-primary px-8 py-10 rounded-xl mb-8">
+        <h2 className="text-4xl font-bold text-primary mb-4">About Me – Kush Morjaria</h2>
+        <p className="text-lg text-foreground leading-relaxed mb-4">
+          My name is Kush Morjaria, and I’m a Computer Science student at York University, graduating in 2027. I’m currently on a co-op as a Technical Systems Analyst at RBC, where I focus on automation and AI-driven solutions. I thrive on momentum—solving problems efficiently and building systems that last. What makes me unique is my ambition. I don’t just want a job—I want to build an empire. That mindset fuels my discipline and honesty in everything I do.
+        </p>
+        <p className="text-lg text-foreground leading-relaxed mb-4">
+          I grew up in Mozambique, a place rich in culture but limited in opportunity. It taught me to be resourceful and grounded, to find solutions even when resources were scarce. That environment shaped my entrepreneurial mindset. I learned that nothing is guaranteed—and that success must be built, not given.
+        </p>
+        <p className="text-lg text-foreground leading-relaxed mb-4">
+          I chose York University for its balance of opportunity, diversity, and strong technical training. I joined the Lassonde School of Engineering with a passion for using technology to create impact. Over time, I gravitated toward Computer Science because it lets me build tools that scale ideas into real-world solutions. I bring self-discipline, curiosity, and quick learning to every project—qualities that help me succeed both in school and at RBC.
+        </p>
+        <p className="text-lg text-foreground leading-relaxed">
+          My greatest inspiration is my father. I’ve always seen him as both a teacher and a leader. No matter how tough life got, he stayed true to his values. His calm under pressure, consistent discipline, and honesty in business are qualities I strive to emulate. He taught me that success without integrity is meaningless—and that real leadership begins with character.
+        </p>
+      </section>
 
+      {/* Core Values & Vision and Professional Background */}
+      <section className="space-y-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <Card className="shadow-card">
             <CardHeader>
               <CardTitle>Core Values & Vision</CardTitle>
@@ -103,7 +90,6 @@ export default function Home() {
                   ))}
                 </div>
               </div>
-              
               <div>
                 <h4 className="font-medium text-foreground mb-2">Career Vision:</h4>
                 <p className="text-muted-foreground leading-relaxed">
@@ -112,6 +98,27 @@ export default function Home() {
                   the highest standards of integrity and professional excellence.
                 </p>
               </div>
+            </CardContent>
+          </Card>
+          <Card className="shadow-card">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <span>Professional Background</span>
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-muted-foreground leading-relaxed">
+                Currently pursuing my undergraduate degree while working as a Technical Systems Analyst 
+                at RBC, one of Canada's leading financial institutions. My role involves supporting 
+                critical infrastructure, developing automation solutions, and contributing to 
+                data-driven decision making.
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                I specialize in Python automation, infrastructure monitoring with Grafana, 
+                and implementing enterprise solutions using Ansible and HashiCorp Vault. 
+                My recent work includes developing AI-powered workflows and proof-of-concept 
+                integrations with HubSpot CRM.
+              </p>
             </CardContent>
           </Card>
         </div>

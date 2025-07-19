@@ -51,30 +51,30 @@ export default function Contact() {
     {
       icon: Mail,
       title: "Email",
-      value: "kush.morjaria@example.com",
-      href: "mailto:kush.morjaria@example.com",
-      description: "Best for detailed inquiries and professional correspondence"
+      value: "kushm@my.yorku.ca",
+      href: "mailto:kushm@my.yorku.ca",
+      description: "Best way to reach out to me. I respond quickly to email."
     },
     {
       icon: Linkedin,
       title: "LinkedIn",
-      value: "linkedin.com/in/kushmorjaria",
-      href: "https://linkedin.com/in/kushmorjaria",
-      description: "Connect for professional networking and career opportunities"
+      value: "linkedin.com/in/kush-morjaria",
+      href: "https://www.linkedin.com/in/kush-morjaria",
+      description: "Connect for professional networking and career opportunities."
     },
     {
-      icon: Phone,
-      title: "Phone",
-      value: "+1 (555) 123-4567",
-      href: "tel:+15551234567",
-      description: "Available for urgent matters and scheduled calls"
+      icon: ExternalLink,
+      title: "Instagram",
+      value: "@kushmorjaria",
+      href: "https://www.instagram.com/kushmorjaria?igsh=MWo1aW10d3VyMHY1Zg==",
+      description: "Follow me for updates and insights."
     },
     {
-      icon: MapPin,
-      title: "Location",
-      value: "Toronto, Ontario, Canada",
-      href: "#",
-      description: "Open to local opportunities and in-person meetings"
+      icon: ExternalLink,
+      title: "X (Twitter)",
+      value: "@KushMorjaria",
+      href: "https://x.com/KushMorjaria",
+      description: "Connect with me on X (formerly Twitter) for tech thoughts and updates."
     }
   ];
 
@@ -82,9 +82,9 @@ export default function Contact() {
     <div className="space-y-12">
       {/* Page Header */}
       <section className="space-y-4">
-        <h1 className="text-4xl font-bold text-foreground">Get in Touch</h1>
+        <h1 className="text-4xl font-bold text-foreground">Contact Me</h1>
         <p className="text-xl text-muted-foreground">
-          Let's connect and explore opportunities to work together
+          The best way to reach out is via email. I'm open to professional opportunities, collaborations, and networking.
         </p>
       </section>
 
@@ -127,7 +127,7 @@ export default function Contact() {
         <div className="text-center space-y-2">
           <h2 className="text-3xl font-bold text-foreground">Send a Message</h2>
           <p className="text-muted-foreground">
-            Use the form below to send me a direct message. I'll respond within 24 hours.
+            Use the form below to send me a direct message. I'll respond as soon as possible.
           </p>
         </div>
 
@@ -219,7 +219,6 @@ export default function Contact() {
             <Calendar className="w-5 h-5 text-primary" />
             <h3 className="text-xl font-bold text-foreground">Professional Availability</h3>
           </div>
-          
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
             <div className="bg-card p-4 rounded-lg shadow-sm">
               <h4 className="font-medium text-foreground mb-2">Collaboration</h4>

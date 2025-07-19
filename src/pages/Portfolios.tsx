@@ -7,51 +7,74 @@ import { Link } from "react-router-dom";
 export default function Portfolios() {
   const portfolios = [
     {
-      id: "discover",
-      title: "Discover Myself",
-      icon: Brain,
-      description: "Self-assessment, personal values exploration, and professional identity development",
-      status: "Complete",
-      artifacts: 5,
-      href: "/portfolios/discover",
-      color: "bg-blue-500/10 text-blue-600",
-      highlights: [
-        "Myers-Briggs Personality Assessment",
-        "Core Values Exercise",
-        "Professional Strengths Analysis",
-        "Career Vision Statement"
-      ]
-    },
-    {
-      id: "skills",
-      title: "Skills & Interests",
-      icon: Target,
-      description: "Undergraduate competencies mapping, skill development tracking, and SMART goals",
-      status: "In Progress", 
-      artifacts: 8,
-      href: "/portfolios/skills",
-      color: "bg-green-500/10 text-green-600",
-      highlights: [
-        "Technical Skills Assessment",
-        "Soft Skills Development Plan",
-        "SMART Goals Framework",
-        "Learning Objectives Tracking"
-      ]
-    },
-    {
-      id: "credentials",
-      title: "Building Credentials",
+      id: "siza",
+      title: "SIZA HubSpot Ticketing POC",
       icon: Award,
-      description: "Project artifacts, code samples, certifications, and professional accomplishments",
-      status: "Active",
-      artifacts: 12,
-      href: "/portfolios/credentials",
+      description: "End‑to‑end proof‑of‑concept ticketing system integrating HubSpot CRM with a React/Tailwind frontend and FastAPI backend, plus live Grafana dashboards.",
+      status: "Demo Pending",
+      artifacts: 3,
+      href: "#",
       color: "bg-purple-500/10 text-purple-600",
       highlights: [
-        "RBC Project Deliverables",
-        "Code Repositories",
-        "Certification Progress",
-        "Professional Recognition"
+        "React, Tailwind CSS, FastAPI, HubSpot OAuth2, Grafana, PostgreSQL",
+        "Live ticket creation/view, CRM tabs, dashboard embedding",
+        "Automated token refresh, REST endpoints"
+      ]
+    },
+    {
+      id: "captionize",
+      title: "Captionize IDEA (WIP)",
+      icon: Brain,
+      description: "AI‑powered classroom captioning app: live Whisper transcription synced with lecture slides and personalized note generation via OpenAI.",
+      status: "In Progress",
+      artifacts: 2,
+      href: "#",
+      color: "bg-blue-500/10 text-blue-600",
+      highlights: [
+        "Python, Whisper API, OpenAI GPT‑4, React Native (planned)",
+        "Transcription, slide sync, study notes"
+      ]
+    },
+    {
+      id: "finance",
+      title: "Personal Finance Tracker",
+      icon: FileText,
+      description: "PDF parser for multi‑line bank & credit‑card statements with transaction classification; visualizes spend categories and trends in Grafana dashboards.",
+      status: "Complete",
+      artifacts: 1,
+      href: "#",
+      color: "bg-green-500/10 text-green-600",
+      highlights: [
+        "Python, PyPDF2, Pandas, Grafana, MySQL",
+        "Transaction classification, spend visualization"
+      ]
+    },
+    {
+      id: "lida",
+      title: "LIDA AI Assistant Enhancements",
+      icon: Brain,
+      description: "Prompt‑engineered Confluence, supervisor, and incident‑retrieval agents to improve enterprise knowledge workflows by 75% in accuracy and relevance.",
+      status: "Internal Demo",
+      artifacts: 1,
+      href: "#",
+      color: "bg-blue-500/10 text-blue-600",
+      highlights: [
+        "LangChain, OpenAI API, Python, Confluence API",
+        "Enterprise knowledge workflow improvements"
+      ]
+    },
+    {
+      id: "collision",
+      title: "Collision 2024 Volunteer Portal",
+      icon: Award,
+      description: "Supported the on‑site tech infrastructure for Collision conference: livestream setup, attendee check‑in tools, and volunteer coordination dashboards.",
+      status: "Complete",
+      artifacts: 1,
+      href: "#",
+      color: "bg-purple-500/10 text-purple-600",
+      highlights: [
+        "Node.js, Socket.io, AWS EC2, Zoom SDK",
+        "Livestream setup, attendee support, dashboards"
       ]
     }
   ];
@@ -129,9 +152,6 @@ export default function Portfolios() {
                     <Badge variant={portfolio.status === "Complete" ? "default" : "secondary"}>
                       {portfolio.status}
                     </Badge>
-                    <Badge variant="outline">
-                      {portfolio.artifacts} artifacts
-                    </Badge>
                   </div>
                 </div>
               </CardHeader>
@@ -149,12 +169,9 @@ export default function Portfolios() {
                 </div>
                 
                 <div className="flex justify-end">
-                  <Link to={portfolio.href}>
-                    <Button variant="outline" className="group">
-                      Explore Portfolio
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </Button>
-                  </Link>
+                  <div className="bg-accent/30 rounded-lg px-4 py-2 text-sm text-muted-foreground font-medium">
+                    <span className="font-semibold text-primary">Coming Soon:</span> This section will allow you to view detailed project demos, code samples, and interactive walkthroughs for each portfolio artifact once public versions are available.
+                  </div>
                 </div>
               </CardContent>
             </Card>
@@ -164,43 +181,41 @@ export default function Portfolios() {
 
       {/* Professional Development Goals */}
       <section className="space-y-6">
-        <h2 className="text-3xl font-bold text-foreground">Current Development Goals</h2>
-        
+        <h2 className="text-3xl font-bold text-foreground">Professional Goals</h2>
         <Card className="shadow-card">
           <CardContent className="pt-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div>
-                <h4 className="font-medium text-foreground mb-3">Short-term Goals (6 months)</h4>
+                <h4 className="font-medium text-foreground mb-3">Short-Term Goals</h4>
                 <ul className="space-y-2 text-muted-foreground">
                   <li className="flex items-start gap-2">
                     <div className="w-1.5 h-1.5 bg-secondary rounded-full mt-2" />
-                    <span>Complete AWS Cloud Practitioner certification</span>
+                    <span>Successfully complete my RBC co‑op term by December 2025, delivering the monitoring pipeline, Grafana dashboards, and LIDA AI enhancements at production quality.</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <div className="w-1.5 h-1.5 bg-secondary rounded-full mt-2" />
-                    <span>Enhance Python automation skills with advanced libraries</span>
+                    <span>Prototype and user‑test the Captionize IDEA MVP in a real classroom setting, gathering feedback to iterate on transcription accuracy and note‑generation features.</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <div className="w-1.5 h-1.5 bg-secondary rounded-full mt-2" />
-                    <span>Develop expertise in container orchestration (Kubernetes)</span>
+                    <span>Expand my automation toolkit by mastering advanced Ansible patterns and HashiCorp Vault workflows through hands‑on projects.</span>
                   </li>
                 </ul>
               </div>
-              
               <div>
-                <h4 className="font-medium text-foreground mb-3">Long-term Goals (2 years)</h4>
+                <h4 className="font-medium text-foreground mb-3">Long-Term Goals</h4>
                 <ul className="space-y-2 text-muted-foreground">
                   <li className="flex items-start gap-2">
                     <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2" />
-                    <span>Transition to Senior Developer or DevOps Engineer role</span>
+                    <span>Transition into a full‑time Technical Systems Analyst or DevOps Engineer role in financial services, leading cross‑functional projects that blend AI, security, and data visualization.</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2" />
-                    <span>Lead cross-functional technology projects</span>
+                    <span>Launch my own AI‑driven SaaS product targeting education and accessibility, leveraging lessons learned from Captionize.</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2" />
-                    <span>Mentor junior developers and contribute to team growth</span>
+                    <span>Build a recognized personal brand in the intersection of FinTech and automation, speaking at conferences and contributing to open‑source communities.</span>
                   </li>
                 </ul>
               </div>

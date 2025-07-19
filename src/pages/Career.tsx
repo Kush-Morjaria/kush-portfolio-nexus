@@ -17,195 +17,107 @@ export default function Career() {
 
       {/* Education Section */}
       <section className="space-y-6">
-        <h2 className="text-3xl font-bold text-foreground">Education</h2>
-        
+        <h2 className="text-3xl font-bold text-primary">Education History</h2>
         <Card className="shadow-card">
           <CardHeader>
-            <div className="flex items-start justify-between">
-              <div>
-                <CardTitle className="text-xl">Bachelor of Technology</CardTitle>
-                <p className="text-muted-foreground">Software Development</p>
-              </div>
-              <Badge variant="secondary">In Progress</Badge>
-            </div>
+            <CardTitle>B.Sc. Computer Science, York University (2023 – 2027 expected)</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center gap-4 text-sm text-muted-foreground">
-              <div className="flex items-center gap-1">
-                <Building className="w-4 h-4" />
-                <span>University/College Name</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <Calendar className="w-4 h-4" />
-                <span>Expected Graduation: 2025</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <MapPin className="w-4 h-4" />
-                <span>Toronto, ON</span>
-              </div>
-            </div>
-            
-            <div className="space-y-3">
-              <div>
-                <h4 className="font-medium text-foreground mb-2">Relevant Coursework:</h4>
-                <div className="flex flex-wrap gap-2">
-                  {[
-                    "Software Engineering",
-                    "Database Systems",
-                    "Web Development",
-                    "System Administration",
-                    "Network Security",
-                    "Project Management"
-                  ].map((course) => (
-                    <Badge key={course} variant="outline" className="text-xs">
-                      {course}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-              
-              <div>
-                <h4 className="font-medium text-foreground mb-2">Academic Achievements:</h4>
-                <ul className="list-disc list-inside text-muted-foreground space-y-1">
-                  <li>Dean's List for Academic Excellence</li>
-                  <li>Cooperative Education Program Participant</li>
-                  <li>Technology Innovation Society Member</li>
-                </ul>
-              </div>
-            </div>
+          <CardContent className="space-y-2">
+            <p className="text-muted-foreground">Awarded the Best Entrance Award (Fall 2023)</p>
+            <p className="text-muted-foreground">Relevant coursework: Data Structures & Algorithms, Database Systems, Machine Learning</p>
           </CardContent>
         </Card>
       </section>
 
       {/* Professional Experience */}
       <section className="space-y-6">
-        <h2 className="text-3xl font-bold text-foreground">Professional Experience</h2>
-        
-        <Card className="shadow-card border-l-4 border-l-primary">
+        <h2 className="text-3xl font-bold text-primary">Work Experience</h2>
+        <Card className="shadow-card">
           <CardHeader>
-            <div className="flex items-start justify-between">
-              <div>
-                <CardTitle className="text-xl">IT Support Specialist (Co-op)</CardTitle>
-                <p className="text-muted-foreground font-medium">Royal Bank of Canada (RBC)</p>
-              </div>
-              <Badge variant="default">Current</Badge>
-            </div>
+            <CardTitle>Technical Systems Analyst (Co‑op), RBC — Toronto, ON</CardTitle>
+            <span className="text-muted-foreground">May 2025 – December 2025</span>
           </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="flex items-center gap-4 text-sm text-muted-foreground">
-              <div className="flex items-center gap-1">
-                <Calendar className="w-4 h-4" />
-                <span>Sept 2024 - Present</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <MapPin className="w-4 h-4" />
-                <span>Toronto, ON</span>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <div>
-                <h4 className="font-medium text-foreground mb-3">Key Responsibilities & Achievements:</h4>
-                <ul className="list-disc list-inside text-muted-foreground space-y-2">
-                  <li>
-                    <strong>Infrastructure Support:</strong> Provide L1/L2 technical support for critical 
-                    banking systems, ensuring 99.9% uptime for business-critical applications
-                  </li>
-                  <li>
-                    <strong>Automation Development:</strong> Developed Python scripts integrated with 
-                    Ansible and HashiCorp Vault to automate routine maintenance tasks, reducing manual 
-                    effort by 40%
-                  </li>
-                  <li>
-                    <strong>Data Visualization:</strong> Created comprehensive Grafana dashboards for 
-                    system monitoring and performance tracking, improving incident response time by 25%
-                  </li>
-                  <li>
-                    <strong>AI Integration:</strong> Led proof-of-concept development for LIDA AI 
-                    (Large Language Models for Data Analysis) to enhance data interpretation capabilities
-                  </li>
-                  <li>
-                    <strong>CRM Enhancement:</strong> Designed and implemented HubSpot integration POC 
-                    to streamline customer relationship management processes
-                  </li>
-                </ul>
-              </div>
-
-              <div>
-                <h4 className="font-medium text-foreground mb-2">Technologies Used:</h4>
-                <div className="flex flex-wrap gap-2">
-                  {[
-                    "Python",
-                    "Ansible",
-                    "HashiCorp Vault",
-                    "Grafana",
-                    "Linux",
-                    "Docker",
-                    "SQL",
-                    "PowerShell",
-                    "HubSpot API",
-                    "REST APIs"
-                  ].map((tech) => (
-                    <Badge key={tech} variant="secondary" className="text-xs">
-                      {tech}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-
-              <div className="bg-accent/30 p-4 rounded-lg">
-                <h4 className="font-medium text-foreground mb-2">Impact & Learning:</h4>
-                <p className="text-muted-foreground leading-relaxed">
-                  This role has provided invaluable experience in enterprise-level IT operations, 
-                  automation, and financial services technology. I've gained deep insights into 
-                  regulatory compliance, security protocols, and the critical importance of 
-                  reliability in financial systems.
-                </p>
-              </div>
-            </div>
+          <CardContent className="space-y-2">
+            <ul className="list-disc pl-6 text-muted-foreground">
+              <li>Built and scheduled a Python‑based monitoring pipeline that queries MongoDB every 15 minutes, detects anomalies, and sends structured alerts into Splunk.</li>
+              <li>Secured credentials via Ansible playbooks pulling secrets (DB URIs, tokens) from HashiCorp Vault.</li>
+              <li>Designed and deployed Grafana dashboards (pie charts, time series) for live ticket and finance metrics, embedding panels in internal portals with anonymous access.</li>
+              <li>Prompt‑engineered GenAI agents (Confluence, supervisor, incident retrieval) for the LIDA platform, boosting retrieval accuracy by 75%.</li>
+            </ul>
+          </CardContent>
+        </Card>
+        <Card className="shadow-card">
+          <CardHeader>
+            <CardTitle>IT Assistant, York University — Toronto, ON</CardTitle>
+            <span className="text-muted-foreground">Sep 2024 – April 2025</span>
+          </CardHeader>
+          <CardContent className="space-y-2">
+            <ul className="list-disc pl-6 text-muted-foreground">
+              <li>Resolved and closed ~20 service tickets/week for faculty & students (software troubleshooting, access issues, password resets).</li>
+              <li>Maintained hardware inventory; coordinated procurement, delivery, and installation of replacement PCs, peripherals, and network equipment.</li>
+              <li>Documented SOPs and trained new student hires on ticketing‑system workflows.</li>
+            </ul>
           </CardContent>
         </Card>
       </section>
 
-      {/* Volunteer & Community Involvement */}
+      {/* Notable Projects & Achievements */}
       <section className="space-y-6">
-        <h2 className="text-3xl font-bold text-foreground">Community Involvement</h2>
-        
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <Card className="shadow-card">
-            <CardHeader>
-              <CardTitle>Technology Mentor</CardTitle>
-              <p className="text-muted-foreground">Local Community Center</p>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-center gap-1 text-sm text-muted-foreground mb-3">
-                <Calendar className="w-4 h-4" />
-                <span>2023 - Present</span>
-              </div>
-              <p className="text-muted-foreground leading-relaxed">
-                Volunteer mentor helping high school students learn programming fundamentals 
-                and explore technology career paths through hands-on workshops and one-on-one guidance.
-              </p>
-            </CardContent>
-          </Card>
+        <h2 className="text-3xl font-bold text-primary">Notable Projects & Achievements</h2>
+        <Card className="shadow-card">
+          <CardHeader>
+            <CardTitle>HubSpot Ticketing POC (“SIZA”)</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-2">
+            <ul className="list-disc pl-6 text-muted-foreground">
+              <li>Architected a full‑stack proof‑of‑concept: React/Tailwind frontend with CRM tabs (Contacts, Deals, Tickets), embedded Grafana dashboard iframe, and live ticket creation/view.</li>
+              <li>Implemented FastAPI backend handling OAuth2 via HubSpot, automated token refresh, and REST endpoints for contacts and tickets.</li>
+            </ul>
+          </CardContent>
+        </Card>
+        <Card className="shadow-card">
+          <CardHeader>
+            <CardTitle>Captionize IDEA (in progress)</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-2">
+            <ul className="list-disc pl-6 text-muted-foreground">
+              <li>Conceptualized an AI‑powered live‑captioning app for classrooms: uses Whisper API for transcription, aligns captions with uploaded slides, and generates personalized study notes via OpenAI.</li>
+            </ul>
+          </CardContent>
+        </Card>
+        <Card className="shadow-card">
+          <CardHeader>
+            <CardTitle>Personal Finance Tracker</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-2">
+            <ul className="list-disc pl-6 text-muted-foreground">
+              <li>Developed a PDF parser for multi‑line bank and credit‑card statements with transaction classification; visualized spend categories in Grafana.</li>
+            </ul>
+          </CardContent>
+        </Card>
+        <Card className="shadow-card">
+          <CardHeader>
+            <CardTitle>Collision 2024 Volunteer</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-2">
+            <ul className="list-disc pl-6 text-muted-foreground">
+              <li>Assisted with on‑site tech setup, attendee support, and speaker livestreams at North America’s leading startup conference.</li>
+            </ul>
+          </CardContent>
+        </Card>
+      </section>
 
-          <Card className="shadow-card">
-            <CardHeader>
-              <CardTitle>Hackathon Participant</CardTitle>
-              <p className="text-muted-foreground">Various Technology Events</p>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-center gap-1 text-sm text-muted-foreground mb-3">
-                <Calendar className="w-4 h-4" />
-                <span>2022 - Present</span>
-              </div>
-              <p className="text-muted-foreground leading-relaxed">
-                Active participant in local hackathons and technology competitions, focusing on 
-                innovative solutions for social impact and business automation challenges.
-              </p>
-            </CardContent>
-          </Card>
-        </div>
+      {/* Certifications & Awards */}
+      <section className="space-y-6">
+        <h2 className="text-3xl font-bold text-primary">Certifications & Awards</h2>
+        <Card className="shadow-card">
+          <CardContent className="space-y-2">
+            <ul className="list-disc pl-6 text-muted-foreground">
+              <li>Best Entrance Award, York University (Fall 2023)</li>
+              <li>Ansible Fundamentals course, Udemy (completed)</li>
+            </ul>
+          </CardContent>
+        </Card>
       </section>
 
       {/* Resume Download */}
@@ -218,16 +130,18 @@ export default function Career() {
             </p>
           </div>
           <div className="flex gap-3">
-            <Button variant="professional" size="lg">
-              <Download className="w-4 h-4" />
-              Download PDF
-            </Button>
-            <Link to="/career/resume">
+            <a href="/KushMorjaria-Resume.pdf" download>
+              <Button variant="professional" size="lg">
+                <Download className="w-4 h-4" />
+                Download PDF
+              </Button>
+            </a>
+            <a href="/KushMorjaria-Resume.pdf" target="_blank" rel="noopener noreferrer">
               <Button variant="outline" size="lg">
                 <ExternalLink className="w-4 h-4" />
                 View Online
               </Button>
-            </Link>
+            </a>
           </div>
         </div>
       </section>
