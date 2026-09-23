@@ -1,24 +1,29 @@
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { Header } from "./Header";
-import { Sidebar } from "./Sidebar";
 import { Footer } from "./Footer";
 
-interface LayoutProps {
-  children: React.ReactNode;
-}
+// React Router doesn't scroll on navigation: jump to the #section if there is one, otherwise to the top.
+const useScrollOnNavigate = () => {
+  const { pathname, hash } = useLocation();
 
-export const Layout = ({ children }: LayoutProps) => {
+  useEffect(() => {
+    if (hash) {
+      document.getElementById(hash.slice(1))?.scrollIntoView();
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, hash]);
+};
+
+export const Layout = ({ children }: { children: React.ReactNode }) => {
+  useScrollOnNavigate();
+
   return (
-    <div className="min-h-screen bg-background">
+    <div className="flex min-h-screen flex-col">
       <Header />
-      <div className="flex min-h-[calc(100vh-64px)]">
-        <Sidebar />
-        <main className="flex-1 min-h-full">
-          <div className="container mx-auto px-6 py-8 max-w-4xl">
-            {children}
-          </div>
-          <Footer />
-        </main>
-      </div>
+      <main className="flex-1">{children}</main>
+      <Footer />
     </div>
   );
 };

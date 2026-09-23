@@ -1,160 +1,166 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Download, Star } from "lucide-react";
+import { ArrowRight, GraduationCap, Mail, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
-import kushHeadshot from "../../image.jpg";
+import { Button } from "@/components/ui/button";
+import { ProjectCard } from "@/components/ProjectCard";
+import { SocialLinks } from "@/components/SocialLinks";
+import { education, experience, profile, projects, skills } from "@/data/profile";
+import headshot from "@/assets/headshot.jpg";
+
+const SectionHeading = ({ eyebrow, title }: { eyebrow: string; title: string }) => (
+  <div className="mb-8 space-y-2">
+    <p className="font-mono text-xs uppercase tracking-widest text-secondary">{eyebrow}</p>
+    <h2 className="text-3xl font-semibold sm:text-4xl">{title}</h2>
+  </div>
+);
 
 export default function Home() {
-  const coreValues = ["Ambition", "Discipline", "Honesty"];
-  const keySkills = ["Python", "Ansible", "Grafana", "IT Support", "Automation", "Data Visualization"];
-
   return (
-    <div className="space-y-12">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary/5 to-secondary/5 -mx-6 px-6 py-12 rounded-xl">
-        <div className="flex flex-col lg:flex-row items-center gap-8">
-          <div className="flex-1 space-y-6">
-            <div className="space-y-2">
-              <h1 className="text-4xl lg:text-5xl font-bold text-foreground">
-                Kush Morjaria
-                <span className="text-primary block text-2xl font-medium mt-2">Technical Systems Analyst</span>
-              </h1>
-              <p className="text-xl text-muted-foreground">
-                Hi, I’m Kush Morjaria, a Technical Systems Analyst co‑op at RBC who blends AI‑driven automation with enterprise finance solutions. Passionate about turning complex data into secure, scalable insights, I build production‑ready pipelines and intelligent dashboards that drive real‑world impact.
-              </p>
-            </div>
-
-            <div className="flex flex-wrap gap-3">
-              <Link to="/career">
-                <Button variant="professional" size="lg" className="group">
-                  Explore My Journey
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Button>
+    <>
+      {/* Hero */}
+      <section className="container grid items-center gap-10 py-16 sm:py-24 md:grid-cols-[1fr_auto]">
+        <div className="max-w-2xl space-y-6">
+          <p className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs text-muted-foreground">
+            <span className="h-1.5 w-1.5 rounded-full bg-success" />
+            {experience[0].title} at {experience[0].org}
+          </p>
+          <h1 className="text-4xl font-semibold leading-[1.05] sm:text-6xl">
+            {profile.name}
+            <span className="mt-3 block text-2xl font-medium text-muted-foreground sm:text-3xl">
+              {profile.tagline}
+            </span>
+          </h1>
+          <p className="text-lg leading-relaxed text-muted-foreground">{profile.intro}</p>
+          <div className="flex flex-wrap items-center gap-3">
+            <Button asChild size="lg">
+              <Link to={{ hash: "#projects" }}>
+                See my projects <ArrowRight />
               </Link>
-              <Link to="/portfolios">
-                <Button variant="accent" size="lg">
-                  View Portfolios
-                </Button>
-              </Link>
-            </div>
+            </Button>
+            <Button asChild size="lg" variant="outline">
+              <a href={`mailto:${profile.email}`}>
+                <Mail /> Get in touch
+              </a>
+            </Button>
           </div>
+          <SocialLinks className="-ml-2" />
+        </div>
+        <div className="mx-auto md:mx-0">
+          <img
+            src={headshot}
+            alt={`Portrait of ${profile.name}`}
+            className="aspect-[4/5] w-60 rounded-2xl object-cover object-top shadow-elevated sm:w-72"
+          />
+        </div>
+      </section>
 
-          <div className="flex-shrink-0">
-            <div className="relative">
-              <img 
-                src={kushHeadshot} 
-                alt="Kush Morjaria - Professional Headshot"
-                className="w-64 h-64 object-cover rounded-full shadow-elevated border-4 border-card"
+      {/* Projects */}
+      <section id="projects" className="container py-16">
+        <SectionHeading eyebrow="Selected work" title="Projects" />
+        <div className="grid gap-6 md:grid-cols-2">
+          {projects.map((project) => (
+            <ProjectCard key={project.slug} project={project} />
+          ))}
+        </div>
+        <p className="mt-6 text-sm text-muted-foreground">
+          Source code for these projects is private. Happy to walk through any of them in a conversation.
+        </p>
+      </section>
+
+      {/* Experience */}
+      <section id="experience" className="container py-16">
+        <SectionHeading eyebrow="Where I've worked" title="Experience" />
+        <ol className="relative space-y-10 border-l border-border pl-6 sm:pl-8">
+          {experience.map((role) => (
+            <li key={`${role.org}-${role.period}`} className="relative">
+              <span
+                className={
+                  role.current
+                    ? "absolute -left-[31px] top-1.5 h-3 w-3 rounded-full bg-secondary ring-4 ring-background sm:-left-[39px]"
+                    : "absolute -left-[31px] top-1.5 h-3 w-3 rounded-full border-2 border-border bg-background sm:-left-[39px]"
+                }
               />
-              <div className="absolute -bottom-2 -right-2 bg-secondary text-secondary-foreground rounded-full p-2">
-                <Star className="w-5 h-5" />
+              <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+                <h3 className="text-lg font-semibold">
+                  {role.title} <span className="font-normal text-muted-foreground">· {role.org}</span>
+                </h3>
+                <span className="font-mono text-xs text-muted-foreground">{role.period}</span>
               </div>
+              <ul className="mt-3 space-y-1.5 text-muted-foreground">
+                {role.points.map((point) => (
+                  <li key={point} className="flex gap-2 leading-relaxed">
+                    <span className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-muted-foreground" />
+                    {point}
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ol>
+
+        <div className="mt-12 flex items-start gap-4 rounded-xl border border-border bg-card p-5 shadow-card">
+          <GraduationCap className="mt-0.5 h-5 w-5 shrink-0 text-secondary" />
+          <div className="flex-1">
+            <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+              <h3 className="font-semibold">{education.degree}</h3>
+              <span className="font-mono text-xs text-muted-foreground">{education.period}</span>
             </div>
+            <p className="text-muted-foreground">{education.school}</p>
+            {education.notes.map((note) => (
+              <p key={note} className="mt-1 text-sm text-muted-foreground">
+                {note}
+              </p>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* About Me Section - Highlighted */}
-      <section className="bg-gradient-to-br from-accent/10 to-secondary/10 border-l-4 border-primary px-8 py-10 rounded-xl mb-8">
-        <h2 className="text-4xl font-bold text-primary mb-4">About Me – Kush Morjaria</h2>
-        <p className="text-lg text-foreground leading-relaxed mb-4">
-          My name is Kush Morjaria, and I’m a Computer Science student at York University, graduating in 2027. I’m currently on a co-op as a Technical Systems Analyst at RBC, where I focus on automation and AI-driven solutions. I thrive on momentum—solving problems efficiently and building systems that last. What makes me unique is my ambition. I don’t just want a job—I want to build an empire. That mindset fuels my discipline and honesty in everything I do.
-        </p>
-        <p className="text-lg text-foreground leading-relaxed mb-4">
-          I grew up in Mozambique, a place rich in culture but limited in opportunity. It taught me to be resourceful and grounded, to find solutions even when resources were scarce. That environment shaped my entrepreneurial mindset. I learned that nothing is guaranteed—and that success must be built, not given.
-        </p>
-        <p className="text-lg text-foreground leading-relaxed mb-4">
-          I chose York University for its balance of opportunity, diversity, and strong technical training. I joined the Lassonde School of Engineering with a passion for using technology to create impact. Over time, I gravitated toward Computer Science because it lets me build tools that scale ideas into real-world solutions. I bring self-discipline, curiosity, and quick learning to every project—qualities that help me succeed both in school and at RBC.
-        </p>
-        <p className="text-lg text-foreground leading-relaxed">
-          My greatest inspiration is my father. I’ve always seen him as both a teacher and a leader. No matter how tough life got, he stayed true to his values. His calm under pressure, consistent discipline, and honesty in business are qualities I strive to emulate. He taught me that success without integrity is meaningless—and that real leadership begins with character.
-        </p>
+      {/* Skills */}
+      <section id="skills" className="container py-16">
+        <SectionHeading eyebrow="Toolbox" title="Skills" />
+        <dl className="grid gap-6 sm:grid-cols-2">
+          {skills.map(({ group, items }) => (
+            <div key={group}>
+              <dt className="mb-2 text-sm font-semibold">{group}</dt>
+              <dd className="flex flex-wrap gap-1.5">
+                {items.map((item) => (
+                  <span key={item} className="rounded-md border border-border bg-card px-2.5 py-1 text-sm">
+                    {item}
+                  </span>
+                ))}
+              </dd>
+            </div>
+          ))}
+        </dl>
       </section>
 
-      {/* Core Values & Vision and Professional Background */}
-      <section className="space-y-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <Card className="shadow-card">
-            <CardHeader>
-              <CardTitle>Core Values & Vision</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div>
-                <h4 className="font-medium text-foreground mb-2">My Core Values:</h4>
-                <div className="flex flex-wrap gap-2">
-                  {coreValues.map((value) => (
-                    <Badge key={value} variant="secondary" className="text-sm">
-                      {value}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <h4 className="font-medium text-foreground mb-2">Career Vision:</h4>
-                <p className="text-muted-foreground leading-relaxed">
-                  To become a technology leader who bridges the gap between business needs 
-                  and innovative solutions, driving digital transformation while maintaining 
-                  the highest standards of integrity and professional excellence.
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="shadow-card">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <span>Professional Background</span>
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <p className="text-muted-foreground leading-relaxed">
-                Currently pursuing my undergraduate degree while working as a Technical Systems Analyst 
-                at RBC, one of Canada's leading financial institutions. My role involves supporting 
-                critical infrastructure, developing automation solutions, and contributing to 
-                data-driven decision making.
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                I specialize in Python automation, infrastructure monitoring with Grafana, 
-                and implementing enterprise solutions using Ansible and HashiCorp Vault. 
-                My recent work includes developing AI-powered workflows and proof-of-concept 
-                integrations with HubSpot CRM.
-              </p>
-            </CardContent>
-          </Card>
+      {/* About */}
+      <section id="about" className="container py-16">
+        <SectionHeading eyebrow="Background" title="About me" />
+        <div className="max-w-2xl space-y-4 text-lg leading-relaxed text-muted-foreground">
+          {profile.about.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
         </div>
       </section>
 
-      {/* Key Skills */}
-      <section className="space-y-6">
-        <h2 className="text-3xl font-bold text-foreground">Technical Expertise</h2>
-        <Card className="shadow-card">
-          <CardContent className="pt-6">
-            <div className="flex flex-wrap gap-3">
-              {keySkills.map((skill) => (
-                <Badge key={skill} variant="outline" className="text-sm py-1 px-3">
-                  {skill}
-                </Badge>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+      {/* Contact */}
+      <section id="contact" className="container py-16">
+        <div className="rounded-2xl bg-primary px-6 py-12 text-center text-primary-foreground sm:px-12">
+          <h2 className="text-3xl font-semibold sm:text-4xl">Let's talk</h2>
+          <p className="mx-auto mt-3 max-w-xl text-primary-foreground/75">
+            Open to internships, co-op, and new-grad roles in AI and software engineering. Email is the fastest way to
+            reach me.
+          </p>
+          <Button asChild size="lg" variant="accent" className="mt-8">
+            <a href={`mailto:${profile.email}`}>
+              <Mail /> {profile.email}
+            </a>
+          </Button>
+          <p className="mt-6 flex items-center justify-center gap-1.5 text-sm text-primary-foreground/60">
+            <MapPin className="h-4 w-4" /> {profile.location}
+          </p>
+        </div>
       </section>
-
-      {/* Purpose Statement */}
-      <section className="bg-accent/30 -mx-6 px-6 py-8 rounded-xl">
-        <h2 className="text-2xl font-bold text-foreground mb-4">Purpose of This Portfolio</h2>
-        <p className="text-muted-foreground leading-relaxed mb-6">
-          This ePortfolio serves as a comprehensive documentation of my professional development, 
-          academic achievements, and personal growth throughout my co-operative education experience. 
-          It showcases my commitment to continuous learning, professional excellence, and my journey 
-          toward becoming a well-rounded technology professional.
-        </p>
-        <p className="text-muted-foreground leading-relaxed">
-          Here you'll find detailed accounts of my work at RBC, reflections on my learning experiences, 
-          portfolio artifacts demonstrating my skills, and my strategic approach to career development 
-          in the technology sector.
-        </p>
-      </section>
-    </div>
+    </>
   );
 }

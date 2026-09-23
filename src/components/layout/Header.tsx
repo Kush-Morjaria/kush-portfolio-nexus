@@ -1,82 +1,82 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { Download, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { SocialLinks } from "@/components/SocialLinks";
+import { profile } from "@/data/profile";
 import kmLogo from "@/assets/km-logo.png";
-import emailLogo from "@/assets/email-logo.svg";
-import linkedinLogo from "@/assets/linkedin-logo.svg";
-import instagramLogo from "@/assets/instagram-logo.svg";
-import xLogo from "@/assets/x-logo.svg";
+
+const navItems = [
+  { label: "Projects", hash: "#projects" },
+  { label: "Experience", hash: "#experience" },
+  { label: "About", hash: "#about" },
+  { label: "Contact", hash: "#contact" },
+];
+
+const resumeHref = profile.resumeUrl ? `${import.meta.env.BASE_URL}${profile.resumeUrl}` : null;
 
 export const Header = () => {
-  const today = new Date().toLocaleDateString('en-US', { 
-    year: 'numeric', 
-    month: 'long', 
-    day: 'numeric' 
-  });
+  const [open, setOpen] = useState(false);
 
   return (
-    <header className="bg-card border-b border-border sticky top-0 z-50 shadow-card">
-      <div className="container mx-auto px-4 py-4">
-        <div className="flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-            <img src={kmLogo} alt="KM Logo" className="w-8 h-8" />
-            <div>
-              <h1 className="text-xl font-bold text-foreground">Kush Morjaria</h1>
-              <p className="text-sm text-muted-foreground">Campus Explorer on a Quest for Adventure</p>
-            </div>
-          </Link>
-          <nav className="hidden md:flex items-center gap-6">
-            <div className="flex items-center gap-4 text-sm text-muted-foreground">
-              <a 
-                href="mailto:kushm@my.yorku.ca" 
-                className="flex items-center gap-2 hover:text-primary transition-colors"
-              >
-                <img src={emailLogo} alt="Email" className="w-5 h-5" />
-                kushm@my.yorku.ca
+    <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur-md">
+      <div className="container flex h-16 items-center justify-between gap-4">
+        <Link to="/" className="flex items-center gap-2.5 font-display font-semibold">
+          <img src={kmLogo} alt="" className="h-7 w-7" />
+          <span>{profile.name}</span>
+        </Link>
+
+        <nav className="hidden items-center gap-1 md:flex" aria-label="Main">
+          {navItems.map((item) => (
+            <Link
+              key={item.hash}
+              to={{ pathname: "/", hash: item.hash }}
+              className="rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+            >
+              {item.label}
+            </Link>
+          ))}
+          {resumeHref && (
+            <Button asChild variant="accent" size="sm" className="ml-2">
+              <a href={resumeHref} target="_blank" rel="noopener noreferrer">
+                <Download /> Resume
               </a>
-              <a 
-                href="https://www.linkedin.com/in/kush-morjaria" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 hover:text-primary transition-colors"
-              >
-                <img src={linkedinLogo} alt="LinkedIn" className="w-5 h-5" />
-                LinkedIn
-              </a>
-              <a 
-                href="https://www.instagram.com/kushmorjaria?igsh=MWo1aW10d3VyMHY1Zg==" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 hover:text-primary transition-colors"
-              >
-                <img src={instagramLogo} alt="Instagram" className="w-5 h-5" />
-                Instagram
-              </a>
-              <a 
-                href="https://x.com/KushMorjaria" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 hover:text-primary transition-colors"
-              >
-                <img src={xLogo} alt="X (Twitter)" className="w-5 h-5" />
-                X
-              </a>
-            </div>
-            <a href="/KushMorjaria-Resume.pdf" download>
-              <Button variant="accent" size="sm">
-                Download Resume
-              </Button>
-            </a>
-          </nav>
-          <div className="md:hidden">
-            <Button variant="ghost" size="sm">
-              Menu
             </Button>
-          </div>
-        </div>
-        <div className="mt-2 text-xs text-muted-foreground text-right">
-          Last updated: {today}
-        </div>
+          )}
+        </nav>
+
+        <Sheet open={open} onOpenChange={setOpen}>
+          <SheetTrigger asChild>
+            <Button variant="ghost" size="icon" className="md:hidden" aria-label="Open menu">
+              <Menu />
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="right" className="flex flex-col gap-6">
+            <SheetTitle className="font-display">{profile.name}</SheetTitle>
+            <nav className="flex flex-col gap-1" aria-label="Mobile">
+              {navItems.map((item) => (
+                <Link
+                  key={item.hash}
+                  to={{ pathname: "/", hash: item.hash }}
+                  onClick={() => setOpen(false)}
+                  className="rounded-md px-3 py-3 text-base transition-colors hover:bg-muted"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+            {resumeHref && (
+              <Button asChild variant="accent">
+                <a href={resumeHref} target="_blank" rel="noopener noreferrer">
+                  <Download /> Resume
+                </a>
+              </Button>
+            )}
+            <SocialLinks className="mt-auto flex-wrap" />
+          </SheetContent>
+        </Sheet>
       </div>
     </header>
   );
-}
+};

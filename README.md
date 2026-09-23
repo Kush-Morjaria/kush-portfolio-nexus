@@ -1,73 +1,33 @@
-# Welcome to your Lovable project
+# Kush Morjaria — Portfolio
 
-## Project info
+Personal portfolio site: projects, experience, and contact.
 
-**URL**: https://lovable.dev/projects/7c51f112-e57d-4245-ac7d-3ca52bd45ef8
+**Live:** https://kush-morjaria.github.io/kush-portfolio-nexus/
 
-## How can I edit this code?
+React · TypeScript · Vite · Tailwind CSS · shadcn/ui · GitHub Pages
 
-There are several ways of editing your application.
+## Updating content
 
-**Use Lovable**
+All text on the site lives in [`src/data/profile.ts`](src/data/profile.ts): profile, projects, experience, education, and skills. Edit that file; the pages render from it.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/7c51f112-e57d-4245-ac7d-3ca52bd45ef8) and start prompting.
+- **Add a project:** add an entry to `projects`. To give it an illustration, add a component for its `slug` in [`src/components/ProjectVisual.tsx`](src/components/ProjectVisual.tsx).
+- **Link a live demo:** set the project's `liveUrl`. A "Try it live" button appears on its page.
+- **Resume:** put the PDF in `public/` and set `profile.resumeUrl` to its filename. The Resume button appears in the header.
+- **Photo:** replace `src/assets/headshot.jpg`. The link-preview image is `public/og-image.jpg`.
 
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+## Develop
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+npm install
+npm run dev      # http://localhost:8080/kush-portfolio-nexus/
 ```
 
-**Edit a file directly in GitHub**
+## Deploy
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```sh
+npm run deploy   # builds, then pushes dist/ to the gh-pages branch
+```
 
-**Use GitHub Codespaces**
+The first time only: in the GitHub repo, go to **Settings → Pages** and set the source to the `gh-pages` branch.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/7c51f112-e57d-4245-ac7d-3ca52bd45ef8) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+The build also copies `index.html` to `404.html`. GitHub Pages has no fallback for single-page apps, so without that file, refreshing or sharing a link like `/projects/ark` would show GitHub's 404 page.
