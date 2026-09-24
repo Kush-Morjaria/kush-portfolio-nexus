@@ -2,14 +2,23 @@
 
 export const profile = {
   name: "Kush Morjaria",
-  role: "Gen AI Developer",
-  tagline: "I build LLM-powered tools and ship small products end to end.",
+  role: "Technical Systems Analyst",
   location: "Toronto, ON",
-  intro:
-    "Computer Science student at York University and Technical Systems Analyst at RBC, where I use Ansible and Gen AI tools to automate work for our SRE team. I also build LLM applications — agents, retrieval, prompts, evaluation — and spend my evenings shipping my own products.",
+  hero: {
+    headline: "Most of what I build started as a problem someone next to me had.",
+    // Set in italic inside the headline.
+    emphasis: "someone next to me",
+    sub: [
+      "A client’s support team, stuck in HubSpot’s default screens.",
+      "My brother, studying for his French exam.",
+      "Me, trying to make sense of my own stock trades.",
+    ],
+    note: "CS at York, graduating 2027.",
+    cta: "What’s the problem next to you?",
+  },
   about: [
     "I grew up in Mozambique, where resources were scarce and you learned to make things work with what you had. That habit stuck: I like problems that need a working answer, not a perfect one.",
-    "Today I'm finishing a B.Sc. in Computer Science at York University while working at RBC, where I've built monitoring dashboards, worked as a Gen AI developer on LLM applications, and now automate operational work for the SRE team. Outside work I build tools I actually use — for my French exam prep, my daily routine, and market research.",
+    "Today I'm finishing a B.Sc. in Computer Science at York University. Outside class and work I build tools I actually use — for my French exam prep, my daily routine, and market research.",
   ],
   email: "kushmorjaria567@gmail.com",
   // Set to e.g. "KushMorjaria-Resume.pdf" (placed in /public) once the updated resume is ready.
@@ -20,6 +29,25 @@ export const profile = {
     instagram: "https://www.instagram.com/kushmorjaria",
     x: "https://x.com/KushMorjaria",
   },
+};
+
+// The transit line down the left edge: one station per section, in page order.
+export const stations = [
+  { code: "01", name: "Vaughan", section: "intro" },
+  { code: "02", name: "Projects", section: "projects" },
+  { code: "03", name: "Now", section: "experience" },
+  { code: "04", name: "Weekends", section: "weekends" },
+  { code: "05", name: "Contact", section: "contact" },
+];
+
+export const weekends = {
+  role: "Frames Stylist",
+  org: "Dumonde Eyecare",
+  note: "Part-time",
+  lines: [
+    "Most people can’t tell you what frames they want. They can tell you when something feels wrong.",
+    "Fitting frames taught me to work out what someone needs before they can say it. It’s what I try to do with AI tools, too.",
+  ],
 };
 
 export type ProjectStatus = "Live" | "In development" | "Working prototype" | "Client work";
@@ -140,30 +168,8 @@ export const experience: Role[] = [
     org: "RBC",
     period: "Sep 2026 – Dec 2026",
     current: true,
-    points: [
-      "Build automations with Ansible and Gen AI tools that make the SRE team's day-to-day work faster and easier",
-      "Find repetitive operational work and turn it into repeatable, automated workflows",
-    ],
-  },
-  {
-    title: "Gen AI Developer (Part-time)",
-    org: "RBC",
-    period: "Jan 2026 – May 2026",
-    points: [
-      "Worked across the LLM engineering lifecycle: agent design, retrieval (RAG), prompt engineering, and evaluation",
-      "Integrated LLM features into internal tools and services while studying full-time",
-    ],
-  },
-  {
-    title: "Technical Systems Analyst (Co-op)",
-    org: "RBC",
-    period: "May 2025 – Dec 2025",
-    points: [
-      "Built a Python monitoring pipeline that checks data on a schedule, detects anomalies, and sends structured alerts to Splunk",
-      "Designed Grafana dashboards for live operational metrics, embedded in internal portals",
-      "Automated secret handling with Ansible and HashiCorp Vault",
-      "Built and tuned conversational AI agents with LangChain and the OpenAI API, served through FastAPI",
-    ],
+    // RBC appears as a job title only: no descriptions of RBC work, projects, or results anywhere on the site.
+    points: [],
   },
   {
     title: "IT Assistant",

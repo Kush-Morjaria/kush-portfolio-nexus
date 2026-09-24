@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { SocialLinks } from "@/components/SocialLinks";
 import { profile } from "@/data/profile";
-import kmLogo from "@/assets/km-logo.png";
+import { KMConstellation } from "@/components/KMConstellation";
 
 const navItems = [
   { label: "Projects", hash: "#projects" },
@@ -20,10 +20,10 @@ export const Header = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur-md">
+    <header className="sticky top-0 z-40 border-b border-border/50 bg-background/75 backdrop-blur-md">
       <div className="container flex h-16 items-center justify-between gap-4">
-        <Link to="/" className="flex items-center gap-2.5 font-display font-semibold">
-          <img src={kmLogo} alt="" className="h-7 w-7" />
+        <Link to="/" className="group flex items-center gap-3 font-display text-lg">
+          <KMConstellation className="h-7 w-[42px]" />
           <span>{profile.name}</span>
         </Link>
 
@@ -32,7 +32,7 @@ export const Header = () => {
             <Link
               key={item.hash}
               to={{ pathname: "/", hash: item.hash }}
-              className="rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+              className="rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:text-secondary"
             >
               {item.label}
             </Link>

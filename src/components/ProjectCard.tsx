@@ -7,9 +7,14 @@ import type { Project } from "@/data/profile";
 export const ProjectCard = ({ project }: { project: Project }) => (
   <Link
     to={`/projects/${project.slug}`}
-    className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:shadow-elevated focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+    className="group flex w-full flex-col overflow-hidden rounded-xl border border-border bg-card transition-[border-color,transform] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:border-muted-foreground/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
   >
-    <ProjectVisual slug={project.slug} className="border-b border-border" />
+    <div className="overflow-hidden border-b border-border">
+      <ProjectVisual
+        slug={project.slug}
+        className="transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.02]"
+      />
+    </div>
     <div className="flex flex-1 flex-col gap-3 p-5">
       <div className="flex items-center justify-between gap-3">
         <h3 className="text-xl font-semibold">{project.name}</h3>
@@ -23,7 +28,7 @@ export const ProjectCard = ({ project }: { project: Project }) => (
           </li>
         ))}
       </ul>
-      <span className="inline-flex items-center gap-1 text-sm font-medium text-foreground">
+      <span className="inline-flex items-center gap-1 text-sm font-medium text-foreground transition-colors group-hover:text-secondary">
         Read more
         <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
       </span>

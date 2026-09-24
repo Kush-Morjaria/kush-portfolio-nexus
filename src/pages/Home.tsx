@@ -1,165 +1,164 @@
-import { ArrowRight, GraduationCap, Mail, MapPin } from "lucide-react";
-import { Link } from "react-router-dom";
+import { ArrowUpRight, GraduationCap, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Hero } from "@/components/Hero";
 import { ProjectCard } from "@/components/ProjectCard";
-import { SocialLinks } from "@/components/SocialLinks";
-import { education, experience, profile, projects, skills } from "@/data/profile";
-import headshot from "@/assets/headshot.jpg";
+import { Reveal } from "@/components/motion/Reveal";
+import { education, experience, profile, projects, skills, weekends } from "@/data/profile";
 
-const SectionHeading = ({ eyebrow, title }: { eyebrow: string; title: string }) => (
-  <div className="mb-8 space-y-2">
-    <p className="font-mono text-xs uppercase tracking-widest text-secondary">{eyebrow}</p>
-    <h2 className="text-3xl font-semibold sm:text-4xl">{title}</h2>
-  </div>
+// `code` is the section's station number on the transit line; sections between stations have none.
+const SectionHeading = ({ code, eyebrow, title }: { code?: string; eyebrow: string; title: string }) => (
+  <Reveal className="mb-12 space-y-4">
+    <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
+      {code ? `${code} — ` : ""}
+      {eyebrow}
+    </p>
+    <h2 className="text-4xl leading-[1.05] sm:text-5xl">{title}</h2>
+  </Reveal>
 );
 
 export default function Home() {
   return (
     <>
-      {/* Hero */}
-      <section className="container grid items-center gap-10 py-16 sm:py-24 md:grid-cols-[1fr_auto]">
-        <div className="max-w-2xl space-y-6">
-          <p className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs text-muted-foreground">
-            <span className="h-1.5 w-1.5 rounded-full bg-success" />
-            {experience[0].title} at {experience[0].org}
-          </p>
-          <h1 className="text-4xl font-semibold leading-[1.05] sm:text-6xl">
-            {profile.name}
-            <span className="mt-3 block text-2xl font-medium text-muted-foreground sm:text-3xl">
-              {profile.tagline}
-            </span>
-          </h1>
-          <p className="text-lg leading-relaxed text-muted-foreground">{profile.intro}</p>
-          <div className="flex flex-wrap items-center gap-3">
-            <Button asChild size="lg">
-              <Link to={{ hash: "#projects" }}>
-                See my projects <ArrowRight />
-              </Link>
-            </Button>
-            <Button asChild size="lg" variant="outline">
-              <a href={`mailto:${profile.email}`}>
-                <Mail /> Get in touch
-              </a>
-            </Button>
-          </div>
-          <SocialLinks className="-ml-2" />
-        </div>
-        <div className="mx-auto md:mx-0">
-          <img
-            src={headshot}
-            alt={`Portrait of ${profile.name}`}
-            className="aspect-[4/5] w-60 rounded-2xl object-cover object-top shadow-elevated sm:w-72"
-          />
-        </div>
-      </section>
+      <Hero />
 
       {/* Projects */}
-      <section id="projects" className="container py-16">
-        <SectionHeading eyebrow="Selected work" title="Projects" />
+      <section id="projects" className="container py-24 sm:py-32">
+        <SectionHeading code="02" eyebrow="Projects" title="Things I’ve built" />
         <div className="grid gap-6 md:grid-cols-2">
-          {projects.map((project) => (
-            <ProjectCard key={project.slug} project={project} />
+          {projects.map((project, i) => (
+            <Reveal key={project.slug} delay={(i % 2) * 140} className="flex">
+              <ProjectCard project={project} />
+            </Reveal>
           ))}
         </div>
-        <p className="mt-6 text-sm text-muted-foreground">
-          Source code for these projects is private. Happy to walk through any of them in a conversation.
-        </p>
+        <Reveal variant="fade">
+          <p className="mt-8 text-sm text-muted-foreground">
+            Source code for these projects is private. Happy to walk through any of them in a conversation.
+          </p>
+        </Reveal>
       </section>
 
       {/* Experience */}
-      <section id="experience" className="container py-16">
-        <SectionHeading eyebrow="Where I've worked" title="Experience" />
-        <ol className="relative space-y-10 border-l border-border pl-6 sm:pl-8">
-          {experience.map((role) => (
+      <section id="experience" className="container py-24 sm:py-32">
+        <SectionHeading code="03" eyebrow="Now" title="Experience" />
+        <ol className="relative space-y-12 border-l border-border pl-6 sm:pl-8">
+          {experience.map((role, i) => (
             <li key={`${role.org}-${role.period}`} className="relative">
               <span
                 className={
                   role.current
-                    ? "absolute -left-[31px] top-1.5 h-3 w-3 rounded-full bg-secondary ring-4 ring-background sm:-left-[39px]"
-                    : "absolute -left-[31px] top-1.5 h-3 w-3 rounded-full border-2 border-border bg-background sm:-left-[39px]"
+                    ? "absolute -left-[30px] top-2 h-2.5 w-2.5 rounded-full bg-foreground ring-4 ring-background sm:-left-[38px]"
+                    : "absolute -left-[30px] top-2 h-2.5 w-2.5 rounded-full border border-muted-foreground bg-background sm:-left-[38px]"
                 }
               />
-              <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
-                <h3 className="text-lg font-semibold">
-                  {role.title} <span className="font-normal text-muted-foreground">· {role.org}</span>
-                </h3>
-                <span className="font-mono text-xs text-muted-foreground">{role.period}</span>
-              </div>
-              <ul className="mt-3 space-y-1.5 text-muted-foreground">
-                {role.points.map((point) => (
-                  <li key={point} className="flex gap-2 leading-relaxed">
-                    <span className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-muted-foreground" />
-                    {point}
-                  </li>
-                ))}
-              </ul>
+              <Reveal delay={i * 60}>
+                <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+                  <h3 className="text-lg font-semibold">
+                    {role.title} <span className="font-normal text-muted-foreground">· {role.org}</span>
+                  </h3>
+                  <span className="font-mono text-xs text-muted-foreground">{role.period}</span>
+                </div>
+                {role.points.length > 0 && (
+                  <ul className="mt-3 space-y-1.5 text-muted-foreground">
+                    {role.points.map((point) => (
+                      <li key={point} className="flex gap-3 leading-relaxed">
+                        <span className="mt-[11px] h-px w-3 shrink-0 bg-muted-foreground/60" />
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </Reveal>
             </li>
           ))}
         </ol>
 
-        <div className="mt-12 flex items-start gap-4 rounded-xl border border-border bg-card p-5 shadow-card">
-          <GraduationCap className="mt-0.5 h-5 w-5 shrink-0 text-secondary" />
-          <div className="flex-1">
-            <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
-              <h3 className="font-semibold">{education.degree}</h3>
-              <span className="font-mono text-xs text-muted-foreground">{education.period}</span>
+        <Reveal className="mt-14">
+          <div className="flex items-start gap-4 rounded-xl border border-border bg-card p-6">
+            <GraduationCap className="mt-0.5 h-5 w-5 shrink-0 text-muted-foreground" />
+            <div className="flex-1">
+              <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+                <h3 className="font-semibold">{education.degree}</h3>
+                <span className="font-mono text-xs text-muted-foreground">{education.period}</span>
+              </div>
+              <p className="text-muted-foreground">{education.school}</p>
+              {education.notes.map((note) => (
+                <p key={note} className="mt-1 text-sm text-muted-foreground">
+                  {note}
+                </p>
+              ))}
             </div>
-            <p className="text-muted-foreground">{education.school}</p>
-            {education.notes.map((note) => (
-              <p key={note} className="mt-1 text-sm text-muted-foreground">
-                {note}
-              </p>
-            ))}
           </div>
-        </div>
+        </Reveal>
       </section>
 
       {/* Skills */}
-      <section id="skills" className="container py-16">
+      <section id="skills" className="container py-24 sm:py-32">
         <SectionHeading eyebrow="Toolbox" title="Skills" />
-        <dl className="grid gap-6 sm:grid-cols-2">
-          {skills.map(({ group, items }) => (
-            <div key={group}>
-              <dt className="mb-2 text-sm font-semibold">{group}</dt>
+        <dl className="grid gap-10 sm:grid-cols-2">
+          {skills.map(({ group, items }, i) => (
+            <Reveal key={group} delay={(i % 2) * 120}>
+              <dt className="mb-3 font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground">{group}</dt>
               <dd className="flex flex-wrap gap-1.5">
                 {items.map((item) => (
-                  <span key={item} className="rounded-md border border-border bg-card px-2.5 py-1 text-sm">
+                  <span key={item} className="rounded-md border border-border px-2.5 py-1 text-sm">
                     {item}
                   </span>
                 ))}
               </dd>
-            </div>
+            </Reveal>
           ))}
         </dl>
       </section>
 
       {/* About */}
-      <section id="about" className="container py-16">
+      <section id="about" className="container py-24 sm:py-32">
         <SectionHeading eyebrow="Background" title="About me" />
-        <div className="max-w-2xl space-y-4 text-lg leading-relaxed text-muted-foreground">
-          {profile.about.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
+        <div className="max-w-2xl space-y-5 text-lg leading-relaxed text-muted-foreground">
+          {profile.about.map((paragraph, i) => (
+            <Reveal key={paragraph} delay={i * 120}>
+              <p>{paragraph}</p>
+            </Reveal>
           ))}
         </div>
       </section>
 
+      {/* Weekends */}
+      <section id="weekends" className="container py-24 sm:py-32">
+        <SectionHeading code="04" eyebrow="Weekends" title={`${weekends.role}, ${weekends.org}`} />
+        <Reveal className="max-w-2xl space-y-4 text-lg leading-relaxed text-muted-foreground">
+          {weekends.lines.map((line) => (
+            <p key={line}>{line}</p>
+          ))}
+          <p className="pt-2 font-mono text-[11px] uppercase tracking-[0.16em]">{weekends.note}</p>
+        </Reveal>
+      </section>
+
       {/* Contact */}
-      <section id="contact" className="container py-16">
-        <div className="rounded-2xl bg-primary px-6 py-12 text-center text-primary-foreground sm:px-12">
-          <h2 className="text-3xl font-semibold sm:text-4xl">Let's talk</h2>
-          <p className="mx-auto mt-3 max-w-xl text-primary-foreground/75">
-            Open to internships, co-op, and new-grad roles in AI and software engineering. Email is the fastest way to
-            reach me.
-          </p>
-          <Button asChild size="lg" variant="accent" className="mt-8">
-            <a href={`mailto:${profile.email}`}>
-              <Mail /> {profile.email}
-            </a>
-          </Button>
-          <p className="mt-6 flex items-center justify-center gap-1.5 text-sm text-primary-foreground/60">
-            <MapPin className="h-4 w-4" /> {profile.location}
-          </p>
-        </div>
+      <section id="contact" className="container py-24 sm:py-32">
+        <Reveal variant="scale">
+          <div className="rounded-2xl border border-border bg-card px-6 py-16 text-center sm:px-12 sm:py-20">
+            <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">05 — Contact</p>
+            <h2 className="mt-4 text-4xl leading-[1.05] sm:text-6xl">
+              Curious how it works? <span className="italic text-muted-foreground">Let’s talk.</span>
+            </h2>
+            <Reveal delay={500} variant="fade">
+              <p className="mx-auto mt-6 max-w-xl text-muted-foreground">
+                Open to internships, co-op, and new-grad roles in AI, automation, and software engineering. Email is the
+                fastest way to reach me.
+              </p>
+              <Button asChild size="lg" variant="accent" className="group mt-10">
+                <a href={`mailto:${profile.email}`}>
+                  {profile.email}
+                  <ArrowUpRight className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                </a>
+              </Button>
+              <p className="mt-8 flex items-center justify-center gap-1.5 text-sm text-muted-foreground">
+                <MapPin className="h-4 w-4" /> {profile.location}
+              </p>
+            </Reveal>
+          </div>
+        </Reveal>
       </section>
     </>
   );

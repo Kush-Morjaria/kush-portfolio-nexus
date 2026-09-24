@@ -26,7 +26,7 @@ export const SocialLinks = ({ className, iconClassName }: { className?: string; 
           rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
           aria-label={label}
           title={label}
-          className="inline-flex h-9 w-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+          className="inline-flex h-9 w-9 items-center justify-center rounded-md text-muted-foreground transition-colors hover:text-secondary"
         >
           <Icon className={cn("h-[18px] w-[18px]", iconClassName)} />
         </a>

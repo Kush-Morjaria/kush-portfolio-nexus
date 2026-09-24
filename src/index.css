@@ -2,82 +2,56 @@
 @tailwind components;
 @tailwind utilities;
 
-/* All colors are HSL channels, consumed as hsl(var(--token)) by tailwind.config.ts. */
+/*
+  All colors are HSL channels, consumed as hsl(var(--token)) by tailwind.config.ts.
+  One accent (amber, --secondary): the transit line fill, the active station, links, and the contact button.
+  Everything else is warm white or warm gray on a warm near-black.
+*/
 
 @layer base {
   :root {
-    --background: 40 20% 98%;
-    --foreground: 222 30% 12%;
+    color-scheme: dark;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222 30% 12%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 30% 12%;
+    --background: 40 9% 6%; /* #12110F */
+    --foreground: 40 20% 92%;
 
-    /* Navy ink */
-    --primary: 222 47% 20%;
-    --primary-foreground: 40 20% 98%;
-    --primary-hover: 222 47% 14%;
+    --card: 40 7% 9%;
+    --card-foreground: 40 20% 92%;
+    --popover: 40 7% 9%;
+    --popover-foreground: 40 20% 92%;
 
-    /* Amber accent */
-    --secondary: 37 80% 55%;
-    --secondary-foreground: 222 47% 14%;
-    --secondary-hover: 37 80% 48%;
+    /* Warm white: default buttons and strong text */
+    --primary: 40 20% 92%;
+    --primary-foreground: 40 9% 6%;
+    --primary-hover: 40 12% 80%;
 
-    --muted: 220 16% 94%;
-    --muted-foreground: 220 12% 40%;
+    /* Amber accent #F5A623 */
+    --secondary: 37 91% 55%;
+    --secondary-foreground: 40 9% 6%;
+    --secondary-hover: 37 91% 62%;
 
-    --accent: 37 80% 94%;
-    --accent-foreground: 30 70% 28%;
+    --muted: 40 6% 12%;
+    --muted-foreground: 38 6% 60%;
 
-    --destructive: 0 72% 50%;
+    --accent: 40 6% 13%;
+    --accent-foreground: 40 20% 92%;
+
+    --destructive: 0 72% 55%;
     --destructive-foreground: 0 0% 98%;
-    --success: 152 55% 36%;
-    --success-foreground: 0 0% 98%;
+    --success: 37 91% 55%;
+    --success-foreground: 40 9% 6%;
 
-    --border: 220 14% 88%;
-    --input: 220 14% 88%;
-    --ring: 37 80% 55%;
+    --border: 40 6% 17%;
+    --input: 40 6% 17%;
+    --ring: 37 91% 55%;
 
-    --shadow-card: 0 1px 2px hsl(222 30% 12% / 0.04), 0 4px 16px hsl(222 30% 12% / 0.06);
-    --shadow-elevated: 0 2px 4px hsl(222 30% 12% / 0.06), 0 12px 32px hsl(222 30% 12% / 0.12);
+    --shadow-card: 0 1px 2px hsl(0 0% 0% / 0.4);
+    --shadow-elevated: 0 20px 40px -12px hsl(0 0% 0% / 0.6);
 
     --radius: 0.75rem;
-  }
 
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --background: 222 30% 7%;
-      --foreground: 40 15% 92%;
-
-      --card: 222 26% 10%;
-      --card-foreground: 40 15% 92%;
-      --popover: 222 26% 10%;
-      --popover-foreground: 40 15% 92%;
-
-      --primary: 40 15% 92%;
-      --primary-foreground: 222 30% 8%;
-      --primary-hover: 40 15% 82%;
-
-      --secondary: 37 80% 58%;
-      --secondary-foreground: 222 30% 8%;
-      --secondary-hover: 37 80% 64%;
-
-      --muted: 222 20% 14%;
-      --muted-foreground: 220 10% 64%;
-
-      --accent: 37 40% 16%;
-      --accent-foreground: 37 80% 70%;
-
-      --success: 152 50% 50%;
-
-      --border: 222 18% 18%;
-      --input: 222 18% 18%;
-      --ring: 37 80% 58%;
-
-      --shadow-card: 0 1px 2px hsl(0 0% 0% / 0.3);
-      --shadow-elevated: 0 12px 32px hsl(0 0% 0% / 0.45);
-    }
+    /* Motion: long, decelerating curves — deliberate, never bouncy. */
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   }
 }
 
@@ -87,7 +61,6 @@
   }
 
   html {
-    scroll-behavior: smooth;
     scroll-padding-top: 5rem;
   }
 
@@ -95,13 +68,69 @@
     @apply bg-background text-foreground font-sans antialiased;
   }
 
-  h1, h2, h3, h4 {
-    @apply font-display tracking-tight;
+  /* Editorial serif for h1/h2; smaller headings stay in the body face. */
+  h1, h2 {
+    @apply font-display font-normal tracking-[-0.01em];
+  }
+
+  h3, h4 {
+    @apply tracking-tight;
+  }
+
+  ::selection {
+    @apply bg-secondary text-secondary-foreground;
   }
 }
 
+/* ---------- Scroll reveals ---------- */
+
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 16px, 0);
+  transition:
+    opacity 900ms var(--ease-out),
+    transform 1200ms var(--ease-out);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal[data-variant="fade"] {
+  transform: none;
+}
+.reveal[data-variant="scale"] {
+  transform: scale(0.965);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
+  .reveal {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ---------- KM constellation (header mark) ---------- */
+
+/* On hover the lines redraw star to star, one after another. Each line has pathLength="1". */
+.km-line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+@keyframes km-draw {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+.group:hover .km-line,
+.group:focus-visible .km-line {
+  animation: km-draw 420ms var(--ease-out) both;
+  animation-delay: calc(var(--i) * 55ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .group:hover .km-line,
+  .group:focus-visible .km-line {
+    animation: none;
   }
 }

@@ -1,0 +1,71 @@
+<!doctype html><html><head><meta charset="utf-8"><link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=block" rel="stylesheet"><style>*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#12110F;--ink:#EEE7DA;--muted:#9C9387;--rule:#2C2925;--rail-muted:#7d756b;--amber:#F5A623;
+ --serif:"Newsreader",Georgia,serif;--sans:"IBM Plex Sans",system-ui,sans-serif;--mono:"IBM Plex Mono",monospace}
+body{background:var(--bg);color:var(--ink);font:17px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+.page{margin-left:176px;padding:0 72px 0 32px}
+.mast{display:flex;align-items:center;justify-content:space-between;padding:22px 0 14px}
+.mast .name{display:flex;align-items:center;gap:14px;font:500 22px/1 var(--serif)}
+.meta{font:400 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;gap:28px}
+.meta b{color:var(--ink);font-weight:500}
+.double{border-top:3px solid var(--ink);border-bottom:1px solid var(--ink);height:7px;opacity:.85}
+.hero{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:56px;padding:52px 0 0}
+h1{font:500 88px/.97 var(--serif);letter-spacing:-.025em;font-variation-settings:"opsz" 72}
+h1 em{font-style:italic;font-weight:400}
+.photo{width:260px;aspect-ratio:4/5;object-fit:cover;object-position:top;filter:grayscale(.35)}
+.briefs{display:grid;grid-template-columns:repeat(3,1fr);margin-top:44px;border-top:1px solid var(--rule)}
+.brief{padding:16px 24px 0 0;border-right:1px solid var(--rule);margin-right:24px}
+.brief:last-child{border-right:0}
+.brief p{font:400 19px/1.45 var(--sans)}
+.brief a{display:inline-block;margin-top:10px;font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.foot{display:flex;align-items:baseline;justify-content:space-between;margin-top:36px;padding-bottom:40px}
+.note{font:400 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.cta{font:400 30px/1.2 var(--serif);font-style:italic;color:var(--amber);border-bottom:1px solid rgba(245,166,35,.45);padding-bottom:2px}
+#projects{padding-top:72px}
+.flag{display:flex;justify-content:space-between;align-items:baseline;border-top:3px solid var(--ink);padding-top:14px}
+.flag h2{font:500 44px/1 var(--serif);letter-spacing:-.02em}
+.lead{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:56px;padding:40px 0;border-bottom:1px solid var(--rule)}
+.status{font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:8px}
+.status.live::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--amber)}
+.lead h3{font:500 64px/1 var(--serif);letter-spacing:-.02em;margin:14px 0 18px}
+.problem{font:400 24px/1.4 var(--serif)}
+.todo{font:400 13px/1.5 var(--mono);color:#c98a1f;opacity:.85;margin-top:12px}
+.go{display:inline-block;margin-top:22px;color:var(--amber);font:500 16px var(--sans);border-bottom:1px solid rgba(245,166,35,.45)}
+.side{border-left:1px solid var(--rule);padding-left:32px;color:var(--muted);font-size:15px}
+.cols{display:grid;grid-template-columns:repeat(3,1fr)}
+.col{padding:28px 28px 0 0;margin-right:28px;border-right:1px solid var(--rule)}
+.col:last-child{border-right:0}
+.col h4{font:500 30px/1.05 var(--serif);margin:12px 0 10px}
+
+.rail{position:fixed;left:0;top:0;bottom:0;width:176px;z-index:5}
+.rail .line{position:absolute;left:40px;top:120px;bottom:88px;width:1px;background:var(--rule)}
+.rail .fill{position:absolute;left:0;top:0;width:1px;height:var(--fill,4%);background:var(--amber)}
+.st{position:absolute;left:-5px;display:flex;align-items:center;gap:12px;transform:translateY(-50%);
+  font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--rail-muted);white-space:nowrap}
+.st i{width:11px;height:11px;border-radius:50%;border:1px solid var(--rail-muted);background:var(--bg);flex:none}
+.st.lit i{background:var(--amber);border-color:var(--amber)}
+.st.cur{color:var(--ink)}
+a{color:inherit;text-decoration:none}
+</style></head><body data-at="0"><nav class="rail"><div class="line"><div class="fill"></div><div class="st" data-i="0" style="top:0%"><i></i><span>01 Vaughan</span></div><div class="st" data-i="1" style="top:25%"><i></i><span>02 Projects</span></div><div class="st" data-i="2" style="top:50%"><i></i><span>03 Now</span></div><div class="st" data-i="3" style="top:75%"><i></i><span>04 Weekends</span></div><div class="st" data-i="4" style="top:100%"><i></i><span>05 Contact</span></div></div></nav><div class="page">
+<header class="mast"><div class="name"><svg viewBox="0 0 60 40" width="39.0" height="26" style="overflow:visible"><line x1="5" y1="5" x2="6.5" y2="19.5" stroke="rgba(238,231,218,.45)" stroke-width="1" vector-effect="non-scaling-stroke"/><line x1="6.5" y1="19.5" x2="4.5" y2="34.5" stroke="rgba(238,231,218,.45)" stroke-width="1" vector-effect="non-scaling-stroke"/><line x1="6.5" y1="19.5" x2="19" y2="6.5" stroke="rgba(238,231,218,.45)" stroke-width="1" vector-effect="non-scaling-stroke"/><line x1="6.5" y1="19.5" x2="21" y2="33" stroke="rgba(238,231,218,.45)" stroke-width="1" vector-effect="non-scaling-stroke"/><line x1="29" y1="34" x2="31" y2="6" stroke="rgba(238,231,218,.45)" stroke-width="1" vector-effect="non-scaling-stroke"/><line x1="31" y1="6" x2="40.5" y2="22.5" stroke="rgba(238,231,218,.45)" stroke-width="1" vector-effect="non-scaling-stroke"/><line x1="40.5" y1="22.5" x2="49.5" y2="4.5" stroke="rgba(238,231,218,.45)" stroke-width="1" vector-effect="non-scaling-stroke"/><line x1="49.5" y1="4.5" x2="53" y2="33.5" stroke="rgba(238,231,218,.45)" stroke-width="1" vector-effect="non-scaling-stroke"/><circle cx="5" cy="5" r="2.0" fill="#F5A623"/><circle cx="6.5" cy="19.5" r="3.4" fill="#F5A623"/><circle cx="4.5" cy="34.5" r="2.3" fill="#F5A623"/><circle cx="19" cy="6.5" r="2.2" fill="#F5A623"/><circle cx="21" cy="33" r="1.9" fill="#F5A623"/><circle cx="29" cy="34" r="2.2" fill="#F5A623"/><circle cx="31" cy="6" r="2.4" fill="#F5A623"/><circle cx="40.5" cy="22.5" r="1.9" fill="#F5A623"/><circle cx="49.5" cy="4.5" r="2.6" fill="#F5A623"/><circle cx="53" cy="33.5" r="2.0" fill="#F5A623"/></svg>Kush Morjaria</div>
+<div class="meta"><span>Toronto</span><span>Last updated <b>September 2026</b></span></div></header>
+<div class="double"></div>
+<section class="hero"><h1>Most of what I build started as a problem <em>someone next to me</em> had.</h1>
+<img class="photo" src="../../src/assets/headshot.jpg"></section>
+<div class="briefs"><div class="brief"><p>A client’s support team, stuck in HubSpot’s default screens.</p><a>&rarr; SIZA</a></div><div class="brief"><p>My brother, studying for his French exam.</p><a>&rarr; TEF Simulator</a></div><div class="brief"><p>Me, trying to make sense of my own stock trades.</p><a>&rarr; ARES 2.0</a></div></div>
+<div class="foot"><span class="note">CS at York, graduating 2027.</span><a class="cta">What’s the problem next to you?</a></div>
+<section id="projects"><div class="flag"><h2>Projects</h2><span class="note">4 entries &middot; source code private</span></div>
+<div class="lead"><div><span class="status live">Live</span><h3>TEF Simulator</h3>
+<p class="problem">My brother, studying for his French exam.</p>
+<p class="todo">TODO &mdash; one line on what changed, in your words.</p><a class="go">Try it &rarr;</a></div>
+<div class="side"><span class="status">Built with</span><p style="margin-top:10px">Node.js, Express, plain JavaScript.</p>
+<p class="todo">A real photo goes here if you add one to src/assets/real/. Otherwise this column stays text.</p></div></div>
+<div class="cols">
+<div class="col"><span class="status">In development</span><h4>ARK</h4><p class="todo">TODO — the problem, and who had it.</p></div>
+<div class="col"><span class="status">Working prototype</span><h4>ARES 2.0</h4><p>Me, trying to make sense of my own stock trades.</p></div>
+<div class="col"><span class="status">Client work</span><h4>SIZA</h4><p>A client’s support team, stuck in HubSpot’s default screens.</p></div>
+</div></section><div style="height:700px"></div></div><script>
+const at = +(document.body.dataset.at || 0);
+document.querySelectorAll('.st').forEach(s => { const i = +s.dataset.i; if (i <= at) s.classList.add('lit'); if (i === at) s.classList.add('cur'); });
+document.querySelector('.fill').style.setProperty('--fill', (at === 0 ? 4 : at * 25 + 3) + '%');
+document.querySelectorAll('[data-cur]').forEach(e => e.textContent = e.dataset['s' + at] || e.textContent);
+</script></body></html>

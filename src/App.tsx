@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Layout } from "./components/layout/Layout";
+import { SmoothScroll } from "./components/motion/SmoothScroll";
 import Home from "./pages/Home";
 import ProjectDetail from "./pages/ProjectDetail";
 import NotFound from "./pages/NotFound";
@@ -9,13 +10,15 @@ const basename = import.meta.env.BASE_URL.replace(/\/$/, "");
 
 const App = () => (
   <BrowserRouter basename={basename}>
-    <Layout>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/projects/:slug" element={<ProjectDetail />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </Layout>
+    <SmoothScroll>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/projects/:slug" element={<ProjectDetail />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Layout>
+    </SmoothScroll>
   </BrowserRouter>
 );
 

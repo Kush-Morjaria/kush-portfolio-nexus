@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowRight, ExternalLink, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProjectVisual } from "@/components/ProjectVisual";
 import { StatusBadge } from "@/components/StatusBadge";
+import { Reveal } from "@/components/motion/Reveal";
 import { profile, projects } from "@/data/profile";
 import NotFound from "./NotFound";
 
@@ -34,7 +35,7 @@ export default function ProjectDetail() {
 
       <header className="mt-6 space-y-4">
         <div className="flex flex-wrap items-center gap-3">
-          <h1 className="text-4xl font-semibold sm:text-5xl">{project.name}</h1>
+          <h1 className="text-5xl leading-none sm:text-6xl">{project.name}</h1>
           <StatusBadge status={project.status} />
         </div>
         <p className="text-lg leading-relaxed text-muted-foreground">{project.summary}</p>
@@ -47,7 +48,9 @@ export default function ProjectDetail() {
         )}
       </header>
 
-      <ProjectVisual slug={project.slug} className="mt-10 rounded-xl border border-border shadow-card" />
+      <Reveal key={project.slug} delay={300} variant="scale" className="mt-10">
+        <ProjectVisual slug={project.slug} className="rounded-xl border border-border" />
+      </Reveal>
 
       <div className="mt-12 space-y-10">
         <section>
@@ -60,7 +63,7 @@ export default function ProjectDetail() {
           <ul className="space-y-2.5">
             {project.highlights.map((h) => (
               <li key={h} className="flex gap-3 leading-relaxed text-muted-foreground">
-                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-secondary" />
+                <span className="mt-[11px] h-px w-3 shrink-0 bg-muted-foreground/60" />
                 {h}
               </li>
             ))}
@@ -103,7 +106,7 @@ export default function ProjectDetail() {
       <footer className="mt-16 flex flex-col gap-4 border-t border-border pt-8 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-sm text-muted-foreground">
           Want a walkthrough?{" "}
-          <a href={`mailto:${profile.email}`} className="font-medium text-foreground underline underline-offset-4">
+          <a href={`mailto:${profile.email}`} className="font-medium text-foreground underline underline-offset-4 transition-colors hover:text-secondary">
             Email me
           </a>
         </p>
