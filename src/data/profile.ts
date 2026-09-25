@@ -71,12 +71,12 @@ export const projects: Project[] = [
     slug: "tef-simulator",
     name: "TEF Simulator",
     summary:
-      "A realistic, timed practice exam for the TEF Canada reading test — the tool I wanted while preparing for it myself.",
+      "A timed practice exam for the TEF Canada reading test, built for my brother while he studied for it.",
     status: "Live",
     stack: ["Node.js", "Express", "JavaScript", "pdf-parse", "Responsive UI"],
     liveUrl: "https://tef-ce-simulator.onrender.com/exam.html?exam=exam-1",
     problem:
-      "Practice material for the TEF Canada Compréhension écrite comes as PDFs. Reading a PDF is nothing like sitting the real exam: no clock, no split screen, no score at the end. I wanted to rehearse under exam conditions.",
+      "My brother was studying for the TEF Canada Compréhension écrite, and the practice material came as PDFs. Reading a PDF is nothing like sitting the real exam: no clock, no split screen, no score at the end. I built this so he could practise under exam conditions.",
     highlights: [
       "Full exam flow: 40 questions, 60-minute countdown, and a split-screen layout with the text beside the questions",
       "Question palette with flagging, so you can skip and come back like in the real test",
