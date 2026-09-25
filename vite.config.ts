@@ -1,15 +1,25 @@
 import { defineConfig, type Plugin } from "vite";
 import react from "@vitejs/plugin-react-swc";
-import { copyFileSync } from "fs";
+import { copyFileSync, mkdirSync } from "fs";
 import path from "path";
+import { projects } from "./src/data/profile";
 
-// GitHub Pages has no SPA fallback: it serves 404.html for unknown paths, so make that the app too.
-// Without this, refreshing or sharing /projects/ark gives GitHub's own 404 page.
-const spaFallback = (): Plugin => ({
-  name: "spa-fallback-404",
+// GitHub Pages has no SPA fallback, so the built app is copied to every path it should answer:
+// - projects/<slug>/index.html for each project, so project pages return 200 (link previews and search
+//   engines treat a 404 as "not found", even though the page renders);
+// - 404.html, so any other path still loads the app and shows its own not-found page.
+const staticRoutes = (): Plugin => ({
+  name: "static-routes",
   apply: "build",
   closeBundle() {
-    copyFileSync(path.resolve(__dirname, "dist/index.html"), path.resolve(__dirname, "dist/404.html"));
+    const dist = path.resolve(__dirname, "dist");
+    const index = path.join(dist, "index.html");
+    for (const { slug } of projects) {
+      const dir = path.join(dist, "projects", slug);
+      mkdirSync(dir, { recursive: true });
+      copyFileSync(index, path.join(dir, "index.html"));
+    }
+    copyFileSync(index, path.join(dist, "404.html"));
   },
 });
 
@@ -20,7 +30,7 @@ export default defineConfig({
     host: "::",
     port: 8080,
   },
-  plugins: [react(), spaFallback()],
+  plugins: [react(), staticRoutes()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

@@ -18,7 +18,7 @@ export const profile = {
   },
   about: [
     "I grew up in Mozambique, where resources were scarce and you learned to make things work with what you had. That habit stuck: I like problems that need a working answer, not a perfect one.",
-    "Today I'm finishing a B.Sc. in Computer Science at York University. Outside class and work I build tools I actually use — for my French exam prep, my daily routine, and market research.",
+    "Today I'm finishing a B.Sc. in Computer Science at York University. Outside class and work I build tools I actually use — for my brother’s French exam, my daily routine, and market research.",
   ],
   email: "kushmorjaria567@gmail.com",
   // Set to e.g. "KushMorjaria-Resume.pdf" (placed in /public) once the updated resume is ready.
