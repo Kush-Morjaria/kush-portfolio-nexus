@@ -1,13 +1,26 @@
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, ArrowRight, ExternalLink, Info } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { ProjectVisual } from "@/components/ProjectVisual";
-import { StatusBadge } from "@/components/StatusBadge";
 import { Reveal } from "@/components/motion/Reveal";
-import { profile, projects } from "@/data/profile";
+import { StatusBadge } from "@/components/StatusBadge";
+import { Todo } from "@/components/Todo";
+import { profile, projects, stations } from "@/data/profile";
+import { projectPhoto } from "@/lib/project-photos";
 import NotFound from "./NotFound";
 
+const projectsStation = stations.find((s) => s.section === "projects")!;
+const contactStation = stations.find((s) => s.section === "contact")!;
+
+// A labelled block: mono label in the left column, content on the right (stacked on phones).
+const Block = ({ label, children }: { label: string; children: React.ReactNode }) => (
+  <Reveal>
+    <section className="grid gap-sm border-t-hair border-rule py-lg md:grid-cols-[11rem_minmax(0,1fr)] md:gap-xl">
+      <h2 className="label pt-2xs font-mono font-normal">{label}</h2>
+      <div className="max-w-2xl">{children}</div>
+    </section>
+  </Reveal>
+);
+
+/** One project, set as a single article: standfirst, the problem and what changed, then the details. */
 export default function ProjectDetail() {
   const { slug } = useParams();
   const index = projects.findIndex((p) => p.slug === slug);
@@ -23,98 +36,110 @@ export default function ProjectDetail() {
   if (!project) return <NotFound />;
 
   const nextProject = projects[(index + 1) % projects.length];
+  const photo = projectPhoto(project.slug);
 
   return (
-    <article className="container max-w-3xl py-12 sm:py-16">
+    <article key={project.slug} className="container pb-section pt-lg">
       <Link
-        to={{ pathname: "/", hash: "#projects" }}
-        className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
+        to={{ pathname: "/", hash: `#${projectsStation.section}` }}
+        className="label transition-colors duration-fast ease-out-expo hover:text-amber"
       >
-        <ArrowLeft className="h-4 w-4" /> All projects
+        ← {projectsStation.code} {projectsStation.name}
       </Link>
 
-      <header className="mt-6 space-y-4">
-        <div className="flex flex-wrap items-center gap-3">
-          <h1 className="text-5xl leading-none sm:text-6xl">{project.name}</h1>
-          <StatusBadge status={project.status} />
-        </div>
-        <p className="text-lg leading-relaxed text-muted-foreground">{project.summary}</p>
-        {project.liveUrl && (
-          <Button asChild size="lg" variant="accent">
-            <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-              Try it live <ExternalLink />
-            </a>
-          </Button>
-        )}
-      </header>
+      <div className="rule-double mt-md" />
 
-      <Reveal key={project.slug} delay={300} variant="scale" className="mt-10">
-        <ProjectVisual slug={project.slug} className="rounded-xl border border-border" />
+      <Reveal>
+        <header className="mt-xl">
+          <StatusBadge status={project.status} />
+          <h1 className="mt-sm text-display-xl">{project.name}</h1>
+          <p className="mt-md max-w-3xl font-display text-lead text-quiet">{project.summary}</p>
+          {project.liveUrl && (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link-amber mt-lg inline-block text-body font-medium"
+            >
+              Try it →
+            </a>
+          )}
+        </header>
       </Reveal>
 
-      <div className="mt-12 space-y-10">
-        <section>
-          <h2 className="mb-3 text-xl font-semibold">Why I built it</h2>
-          <p className="leading-relaxed text-muted-foreground">{project.problem}</p>
-        </section>
+      {photo && (
+        <Reveal className="mt-xl">
+          <img src={photo} alt={`${project.name}, in use`} className="w-full object-cover" />
+        </Reveal>
+      )}
 
-        <section>
-          <h2 className="mb-3 text-xl font-semibold">What it does</h2>
-          <ul className="space-y-2.5">
-            {project.highlights.map((h) => (
-              <li key={h} className="flex gap-3 leading-relaxed text-muted-foreground">
-                <span className="mt-[11px] h-px w-3 shrink-0 bg-muted-foreground/60" />
-                {h}
+      <div className="mt-2xl border-b-hair border-rule">
+        <Block label="The problem">
+          {project.who ? (
+            <p className="font-display text-title font-normal">{project.who}</p>
+          ) : (
+            <Todo>the problem, and who had it.</Todo>
+          )}
+        </Block>
+
+        <Block label="What changed">
+          {project.changed ? (
+            <p className="font-display text-title font-normal">{project.changed}</p>
+          ) : (
+            <Todo>one line on what changed for them.</Todo>
+          )}
+        </Block>
+
+        <Block label="Why I built it">
+          <p className="text-body text-quiet">{project.problem}</p>
+        </Block>
+
+        <Block label="What it does">
+          <ul className="divide-y divide-rule">
+            {project.highlights.map((item) => (
+              <li key={item} className="py-xs text-body first:pt-0 last:pb-0">
+                {item}
               </li>
             ))}
           </ul>
-        </section>
+        </Block>
 
         {project.next && (
-          <section>
-            <h2 className="mb-3 text-xl font-semibold">What's next</h2>
-            <ul className="space-y-2.5">
-              {project.next.map((n) => (
-                <li key={n} className="flex gap-3 leading-relaxed text-muted-foreground">
-                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full border border-muted-foreground" />
-                  {n}
+          <Block label="What’s next">
+            <ul className="divide-y divide-rule">
+              {project.next.map((item) => (
+                <li key={item} className="py-xs text-body text-quiet first:pt-0 last:pb-0">
+                  {item}
                 </li>
               ))}
             </ul>
-          </section>
+          </Block>
         )}
 
-        <section>
-          <h2 className="mb-3 text-xl font-semibold">Built with</h2>
-          <ul className="flex flex-wrap gap-1.5">
-            {project.stack.map((tech) => (
-              <li key={tech} className="rounded-md border border-border bg-card px-2.5 py-1 font-mono text-xs">
-                {tech}
-              </li>
-            ))}
-          </ul>
-        </section>
+        <Block label="Built with">
+          <p className="text-body text-quiet">{project.stack.join(", ")}.</p>
+        </Block>
 
         {project.note && (
-          <p className="flex gap-2 rounded-lg bg-muted p-4 text-sm text-muted-foreground">
-            <Info className="mt-0.5 h-4 w-4 shrink-0" />
-            {project.note}
-          </p>
+          <Block label="Note">
+            <p className="text-body text-quiet">{project.note}</p>
+          </Block>
         )}
       </div>
 
-      <footer className="mt-16 flex flex-col gap-4 border-t border-border pt-8 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-sm text-muted-foreground">
+      <footer className="mt-xl flex flex-col gap-md sm:flex-row sm:items-baseline sm:justify-between">
+        <p className="text-small text-quiet">
           Want a walkthrough?{" "}
-          <a href={`mailto:${profile.email}`} className="font-medium text-foreground underline underline-offset-4 transition-colors hover:text-secondary">
-            Email me
-          </a>
+          <Link to={{ pathname: "/", hash: `#${contactStation.section}` }} className="link-amber">
+            Ask me →
+          </Link>
         </p>
         <Link
           to={`/projects/${nextProject.slug}`}
-          className="inline-flex items-center gap-1.5 text-sm font-medium transition-colors hover:text-secondary"
+          className="font-display text-title transition-colors duration-fast ease-out-expo hover:text-amber"
         >
-          Next: {nextProject.name} <ArrowRight className="h-4 w-4" />
+          <span className="label mr-sm align-middle">Next</span>
+          {nextProject.name} →
         </Link>
       </footer>
     </article>

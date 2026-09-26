@@ -11,7 +11,7 @@ const SECTION_OFFSET = 48;
 
 // React Router doesn't scroll on navigation: glide to the #section if there is one, otherwise jump to the top.
 const useScrollOnNavigate = () => {
-  const { pathname, hash } = useLocation();
+  const { pathname, hash, key } = useLocation();
   const lenis = useLenis();
 
   useEffect(() => {
@@ -24,15 +24,16 @@ const useScrollOnNavigate = () => {
     } else {
       window.scrollTo(0, 0);
     }
-  }, [pathname, hash, lenis]);
+    // `key` changes on every navigation, so tapping a link to the section you already scrolled away from still works.
+  }, [pathname, hash, key, lenis]);
 };
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   useScrollOnNavigate();
 
   return (
-    // lg:pl-44 leaves the left margin for the transit line.
-    <div className="flex min-h-screen flex-col lg:pl-44">
+    // lg:pl-rail leaves the left margin for the transit line.
+    <div className="flex min-h-screen flex-col lg:pl-rail">
       <TransitLine />
       <Header />
       <main className="flex-1">{children}</main>

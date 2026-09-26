@@ -1,61 +1,87 @@
-import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Reveal } from "@/components/motion/Reveal";
-import { profile, stations } from "@/data/profile";
+import { profile, projects, stations } from "@/data/profile";
 import headshot from "@/assets/headshot.jpg";
 
 const { hero } = profile;
-const station = stations[0];
 const [before, after] = hero.headline.split(hero.emphasis);
 const ctaHref = `mailto:${profile.email}?subject=${encodeURIComponent("The problem next to me")}`;
+// The three problem lines are the projects' own `who` lines, so each is written once (in profile.ts).
+const problems = hero.sub.map((slug) => projects.find((p) => p.slug === slug)!);
 
+/**
+ * Front page. Headline beside the portrait (desktop) or over a byline (phones), then the three problems as
+ * ruled columns, each linking to the project it became, then the one call to action.
+ */
 export const Hero = () => (
-  <section id={station.section} className="container pb-24 pt-8 sm:pb-32 sm:pt-10">
-    {/* Dateline, newspaper-style. */}
-    <Reveal variant="fade">
-      <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-y border-border py-2.5 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
-        <span>
-          {station.code} — {station.name}, ON
-        </span>
-      </div>
-    </Reveal>
+  <section id={stations[0].section} className="container pb-section pt-lg">
+    <div className="rule-double" />
 
-    <div className="mt-12 grid gap-12 sm:mt-14 lg:grid-cols-[minmax(0,1fr)_13rem] lg:gap-16 xl:grid-cols-[minmax(0,1fr)_15rem]">
+    <div className="mt-xl grid gap-xl lg:grid-cols-[minmax(0,1fr)_15rem] lg:gap-2xl xl:grid-cols-[minmax(0,1fr)_17rem]">
       <div>
-        <Reveal delay={120}>
-          <h1 className="max-w-[18ch] text-[clamp(2.6rem,5.2vw,4.5rem)] leading-[1.02]">
+        <Reveal>
+          <h1 className="max-w-[15ch] text-display-xl">
             {before}
-            <em className="italic">{hero.emphasis}</em>
+            <em className="font-normal italic">{hero.emphasis}</em>
             {after}
           </h1>
         </Reveal>
 
-        <Reveal delay={300} className="mt-8 max-w-xl">
-          <div className="space-y-1 text-lg leading-relaxed text-muted-foreground">
-            {hero.sub.map((line) => (
-              <p key={line}>{line}</p>
-            ))}
+        {/* Phones and tablets: a byline instead of the portrait column. */}
+        <Reveal delay={120} className="mt-lg flex items-center gap-md lg:hidden">
+          <img src={headshot} alt={`Portrait of ${profile.name}`} className="h-20 w-16 object-cover object-top" />
+          <div className="space-y-2xs">
+            <p className="label text-ink">{profile.name}</p>
+            <p className="label">{hero.note}</p>
           </div>
-          <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">{hero.note}</p>
-        </Reveal>
-
-        <Reveal delay={450} className="mt-10">
-          <a
-            href={ctaHref}
-            className="group inline-flex items-baseline gap-3 font-display text-2xl italic text-secondary decoration-secondary/50 underline-offset-[6px] hover:underline sm:text-3xl"
-          >
-            {hero.cta}
-            <ArrowRight className="h-5 w-5 translate-y-0.5 self-center transition-transform duration-300 group-hover:translate-x-1" />
-          </a>
         </Reveal>
       </div>
 
-      <Reveal delay={250}>
+      <Reveal delay={150} className="hidden lg:block">
         <img
           src={headshot}
           alt={`Portrait of ${profile.name}`}
-          className="aspect-[4/5] w-44 rounded-sm object-cover object-top saturate-[0.85] sm:w-52 lg:w-full"
+          className="aspect-[4/5] w-full object-cover object-top"
         />
       </Reveal>
     </div>
+
+    <Reveal delay={250} className="mt-xl lg:mt-2xl">
+      <ul className="grid border-t-hair border-rule md:grid-cols-3">
+        {problems.map((project, i) => (
+          <li
+            key={project.slug}
+            className={
+              i === 0
+                ? "border-b-hair border-rule py-md md:border-b-0 md:pb-0 md:pr-lg"
+                : "border-b-hair border-rule py-md md:border-b-0 md:border-l-hair md:pb-0 md:px-lg last:md:pr-0"
+            }
+          >
+            <Link to={`/projects/${project.slug}`} className="group block">
+              <p className="font-display text-lead">{project.who}</p>
+              <p className="label mt-xs transition-colors duration-fast ease-out-expo group-hover:text-amber">
+                → {project.name}
+              </p>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </Reveal>
+
+    {/* Where I'm from, then the one call to action. */}
+    <Reveal
+      delay={400}
+      className="mt-xl grid gap-lg border-t-hair border-rule pt-lg lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end lg:gap-2xl"
+    >
+      <div className="max-w-2xl space-y-2xs text-body text-quiet">
+        {hero.about.map((line) => (
+          <p key={line}>{line}</p>
+        ))}
+        <p className="label hidden pt-xs lg:block">{hero.note}</p>
+      </div>
+      <a href={ctaHref} className="link-amber justify-self-start font-display text-title italic lg:justify-self-end">
+        {hero.cta}
+      </a>
+    </Reveal>
   </section>
 );

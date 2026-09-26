@@ -3,55 +3,95 @@
 @tailwind utilities;
 
 /*
-  All colors are HSL channels, consumed as hsl(var(--token)) by tailwind.config.ts.
-  One accent (amber, --secondary): the transit line fill, the active station, links, and the contact button.
-  Everything else is warm white or warm gray on a warm near-black.
+  Design system — "Broadsheet".
+  Every colour, space, type size and motion value is defined once here and consumed through
+  tailwind.config.ts. Components use the Tailwind names (text-display-xl, py-section, bg-background,
+  duration-base, ease-out-expo …), never raw values.
+
+  Colour: HSL channels so Tailwind's /opacity modifiers work.
+  One accent, amber: the transit line fill, the active station, links, and the contact button. Nothing else.
 */
 
 @layer base {
   :root {
     color-scheme: dark;
 
-    --background: 40 9% 6%; /* #12110F */
-    --foreground: 40 20% 92%;
+    /* ---- Palette ---- */
+    --ink: 39 37% 89%; /* #EEE7DA  newsprint white: headlines, body text */
+    --quiet: 34 10% 57%; /* #9C9387  secondary text, labels */
+    --paper: 40 9% 6%; /* #12110F  page */
+    --paper-raised: 36 8% 9%; /* #181613  form fields, the odd raised surface */
+    --rule: 34 9% 16%; /* #2C2925  hairlines */
+    --amber: 37 91% 55%; /* #F5A623  the only accent */
+    --amber-soft: 37 91% 62%;
+    --danger: 4 72% 60%; /* form errors only */
 
-    --card: 40 7% 9%;
-    --card-foreground: 40 20% 92%;
-    --popover: 40 7% 9%;
-    --popover-foreground: 40 20% 92%;
+    /* shadcn/ui tokens, mapped onto the palette so its primitives match */
+    --background: var(--paper);
+    --foreground: var(--ink);
+    --card: var(--paper-raised);
+    --card-foreground: var(--ink);
+    --popover: var(--paper-raised);
+    --popover-foreground: var(--ink);
+    --primary: var(--ink);
+    --primary-foreground: var(--paper);
+    --primary-hover: 39 20% 78%;
+    --secondary: var(--amber);
+    --secondary-foreground: var(--paper);
+    --secondary-hover: var(--amber-soft);
+    --muted: var(--paper-raised);
+    --muted-foreground: var(--quiet);
+    --accent: var(--paper-raised);
+    --accent-foreground: var(--ink);
+    --destructive: var(--danger);
+    --destructive-foreground: var(--ink);
+    --success: var(--amber);
+    --success-foreground: var(--paper);
+    --border: var(--rule);
+    --input: var(--rule);
+    --ring: var(--amber);
 
-    /* Warm white: default buttons and strong text */
-    --primary: 40 20% 92%;
-    --primary-foreground: 40 9% 6%;
-    --primary-hover: 40 12% 80%;
+    /* ---- Space ----
+       A small scale, stepped rather than continuous, so gaps read as deliberate. */
+    --space-2xs: 0.25rem; /*  4 */
+    --space-xs: 0.5rem; /*  8 */
+    --space-sm: 0.75rem; /* 12 */
+    --space-md: 1.25rem; /* 20 */
+    --space-lg: 2rem; /* 32 */
+    --space-xl: 3rem; /* 48 */
+    --space-2xl: 4.5rem; /* 72 */
+    --space-section: clamp(4.5rem, 2.5rem + 6vw, 8.5rem); /* between sections: 72 → 136 */
+    --rail-width: 11rem; /* the transit line's margin column (lg and up) */
+    --header-height: 4rem;
 
-    /* Amber accent #F5A623 */
-    --secondary: 37 91% 55%;
-    --secondary-foreground: 40 9% 6%;
-    --secondary-hover: 37 91% 62%;
+    /* ---- Type ----
+       Display: Source Serif 4. Body: IBM Plex Sans. Labels: IBM Plex Mono.
+       Big contrast on purpose: the hero headline is ~5.5× body size. */
+    --font-display: "Source Serif 4", Georgia, serif;
+    --font-body: "IBM Plex Sans", system-ui, sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, monospace;
 
-    --muted: 40 6% 12%;
-    --muted-foreground: 38 6% 60%;
+    --text-display-xl: clamp(2.75rem, 1.6rem + 5vw, 5.75rem); /* hero headline: 44 → 92 */
+    --text-display-lg: clamp(2.25rem, 1.5rem + 3.2vw, 4rem); /* lead story: 36 → 64 */
+    --text-display-md: clamp(1.875rem, 1.4rem + 1.9vw, 2.75rem); /* section flags: 30 → 44 */
+    --text-title: 1.625rem; /* 26: brief titles */
+    --text-lead: 1.3125rem; /* 21: decks, serif paragraphs */
+    --text-body: 1.0625rem; /* 17 */
+    --text-small: 0.9375rem; /* 15 */
+    --text-label: 0.6875rem; /* 11: mono labels */
 
-    --accent: 40 6% 13%;
-    --accent-foreground: 40 20% 92%;
+    /* ---- Lines ---- */
+    --rule-hair: 1px;
+    --rule-heavy: 3px;
+    --radius: 2px; /* near-square: print, not app */
 
-    --destructive: 0 72% 55%;
-    --destructive-foreground: 0 0% 98%;
-    --success: 37 91% 55%;
-    --success-foreground: 40 9% 6%;
-
-    --border: 40 6% 17%;
-    --input: 40 6% 17%;
-    --ring: 37 91% 55%;
-
-    --shadow-card: 0 1px 2px hsl(0 0% 0% / 0.4);
-    --shadow-elevated: 0 20px 40px -12px hsl(0 0% 0% / 0.6);
-
-    --radius: 0.75rem;
-
-    /* Motion: long, decelerating curves — deliberate, never bouncy. */
+    /* ---- Motion ----
+       Long decelerating curves; nothing bounces. Only transform and opacity animate. */
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --dur-fast: 200ms; /* hovers, colour changes */
+    --dur-base: 500ms; /* station arrivals, rules drawing */
+    --dur-slow: 900ms; /* scroll reveals */
+    --reveal-distance: 12px;
   }
 }
 
@@ -61,20 +101,23 @@
   }
 
   html {
-    scroll-padding-top: 5rem;
+    /* Below lg the header adds a 2rem "Now at · Next" row. */
+    scroll-padding-top: calc(var(--header-height) + 2rem + var(--space-md));
+  }
+  @media (min-width: 1024px) {
+    html {
+      scroll-padding-top: calc(var(--header-height) + var(--space-md));
+    }
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    @apply bg-background font-sans text-body text-foreground antialiased;
   }
 
-  /* Editorial serif for h1/h2; smaller headings stay in the body face. */
-  h1, h2 {
-    @apply font-display font-normal tracking-[-0.01em];
-  }
-
-  h3, h4 {
-    @apply tracking-tight;
+  h1,
+  h2,
+  h3 {
+    @apply font-display font-semibold;
   }
 
   ::selection {
@@ -82,21 +125,40 @@
   }
 }
 
+@layer components {
+  /* Mono label: section numbers, statuses, datelines. */
+  .label {
+    @apply font-mono text-label uppercase text-muted-foreground;
+  }
+
+  /* Newspaper double rule: a heavy line over a hairline. */
+  .rule-double {
+    border-top: var(--rule-heavy) solid hsl(var(--ink));
+    border-bottom: var(--rule-hair) solid hsl(var(--ink));
+    height: calc(var(--rule-heavy) + var(--rule-hair) + 3px);
+  }
+
+  /* Amber text link with a quiet underline that firms up on hover. */
+  .link-amber {
+    @apply text-secondary underline decoration-secondary/40 underline-offset-[0.2em] transition-colors duration-fast ease-out-expo hover:decoration-secondary;
+  }
+}
+
 /* ---------- Scroll reveals ---------- */
 
 .reveal {
   opacity: 0;
-  transform: translate3d(0, 16px, 0);
+  transform: translate3d(0, var(--reveal-distance), 0);
   transition:
-    opacity 900ms var(--ease-out),
-    transform 1200ms var(--ease-out);
+    opacity var(--dur-slow) var(--ease-out),
+    transform var(--dur-slow) var(--ease-out);
   transition-delay: var(--reveal-delay, 0ms);
 }
 .reveal[data-variant="fade"] {
   transform: none;
 }
 .reveal[data-variant="scale"] {
-  transform: scale(0.965);
+  transform: scale(0.98);
 }
 .reveal.is-visible {
   opacity: 1;
