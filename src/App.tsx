@@ -1,4 +1,3 @@
-import { lazy, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Layout } from "./components/layout/Layout";
 import { SmoothScroll } from "./components/motion/SmoothScroll";
@@ -9,9 +8,6 @@ import NotFound from "./pages/NotFound";
 // BASE_URL is Vite's `base` (e.g. "/kush-portfolio-nexus/" on GitHub Pages); the router needs it without the trailing slash.
 const basename = import.meta.env.BASE_URL.replace(/\/$/, "");
 
-// Design-system specimen at /_system: dev only, and dropped from production builds entirely.
-const DesignSystem = import.meta.env.DEV ? lazy(() => import("./pages/DesignSystem")) : null;
-
 const App = () => (
   <BrowserRouter basename={basename}>
     <SmoothScroll>
@@ -19,16 +15,6 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/projects/:slug" element={<ProjectDetail />} />
-          {DesignSystem && (
-            <Route
-              path="/_system"
-              element={
-                <Suspense>
-                  <DesignSystem />
-                </Suspense>
-              }
-            />
-          )}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>

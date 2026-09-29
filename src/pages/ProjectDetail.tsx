@@ -69,7 +69,7 @@ export default function ProjectDetail() {
 
       {photo && (
         <Reveal className="mt-xl">
-          <img src={photo} alt={`${project.name}, in use`} className="w-full object-cover" />
+          <img src={photo} alt={`${project.name}, in use`} className="w-full border-hair border-rule object-cover" />
         </Reveal>
       )}
 

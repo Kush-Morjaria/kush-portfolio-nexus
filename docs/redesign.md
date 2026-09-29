@@ -48,7 +48,7 @@ Mockup: `docs/design/a-broadsheet-mockup.html`, screenshots `docs/design/a-broad
 
 ## Phase 3 — status
 
-Design system in `src/index.css` (tokens) + `tailwind.config.ts` (names only). Dev-only specimen at `/_system` (`src/pages/DesignSystem.tsx`) — **delete it once the redesign is signed off.**
+Design system in `src/index.css` (tokens) + `tailwind.config.ts` (names only). (The dev-only `/_system` specimen was deleted at sign-off.)
 
 Done and approved: design system · hero + masthead + one-nav (rail / phone readout / menu) · Projects (lead + briefs, `who`/`changed` lines) · Today (station 03) · Contact (Web3Forms, station 04) · project pages (no drawings/pills; "how" removed from What it does) · footer · 404.
 

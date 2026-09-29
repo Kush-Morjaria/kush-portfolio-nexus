@@ -59,7 +59,7 @@ export const ProjectsSection = () => {
               <ReadMore slug={lead.slug} />
             </div>
           </div>
-          {photo && <img src={photo} alt={`${lead.name}, in use`} className="w-full object-cover" />}
+          {photo && <img src={photo} alt={`${lead.name}, in use`} className="w-full border-hair border-rule object-cover" />}
         </article>
       </Reveal>
 
@@ -77,7 +77,7 @@ export const ProjectsSection = () => {
             >
               <Reveal delay={i * 100}>
                 {briefPhoto && (
-                  <img src={briefPhoto} alt={`${project.name}, in use`} className="mb-md aspect-[4/3] w-full object-cover" />
+                  <img src={briefPhoto} alt={`${project.name}, in use`} className="mb-md aspect-[4/3] w-full border-hair border-rule object-cover" />
                 )}
                 <StatusBadge status={project.status} />
                 <h3 className="mt-xs text-title">

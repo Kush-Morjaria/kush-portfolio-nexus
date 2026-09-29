@@ -107,11 +107,32 @@ export const ContactSection = () => {
 
   return (
     <section id="contact" className="container pb-section">
-      <SectionFlag station="contact" title="Contact" />
+      <SectionFlag station="contact" title="Contact" note="Last stop" />
 
       <div className="grid gap-xl lg:grid-cols-[minmax(0,1fr)_minmax(0,1.7fr)] lg:gap-2xl">
         <Reveal>
           <p className="max-w-[20ch] font-display text-display-md font-normal">{contact.fastest}</p>
+          <div className="mt-xl space-y-sm border-t-hair border-rule pt-lg">
+            <CopyEmail />
+            <div className="flex flex-wrap gap-x-lg gap-y-xs">
+              <a
+                href={profile.socials.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="label transition-colors duration-fast hover:text-amber"
+              >
+                LinkedIn →
+              </a>
+              <a
+                href={profile.socials.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="label transition-colors duration-fast hover:text-amber"
+              >
+                GitHub →
+              </a>
+            </div>
+          </div>
         </Reveal>
 
         <Reveal delay={120}>
@@ -192,27 +213,6 @@ export const ContactSection = () => {
             </div>
           </form>
 
-          <div className="mt-xl space-y-sm border-t-hair border-rule pt-lg">
-            <CopyEmail />
-            <div className="flex flex-wrap gap-x-lg gap-y-xs">
-              <a
-                href={profile.socials.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="label transition-colors duration-fast hover:text-amber"
-              >
-                LinkedIn →
-              </a>
-              <a
-                href={profile.socials.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="label transition-colors duration-fast hover:text-amber"
-              >
-                GitHub →
-              </a>
-            </div>
-          </div>
         </Reveal>
       </div>
     </section>

@@ -83,9 +83,9 @@ export const projects: Project[] = [
     problem:
       "My brother was studying for the TEF Canada Compréhension écrite, and the practice material came as PDFs. Reading a PDF is nothing like sitting the real exam: no clock, no split screen, no score at the end. I built this so he could practise under exam conditions.",
     highlights: [
-      "Full exam flow: 40 questions, 60-minute countdown, and a split-screen layout with the text beside the questions",
+      "40 questions and a 60-minute timer, like the real exam, with the passage and questions side by side.",
       "Question palette with flagging, so you can skip and come back like in the real test",
-      "Instant scoring with an estimated NCLC level, then a review mode that explains every answer",
+      "Scores you right away with an estimated NCLC level, and explains every answer after.",
       "Six mock exams",
       "Works on phones",
     ],
@@ -97,22 +97,22 @@ export const projects: Project[] = [
     who: "Me, trying to lock in for the semester, and my brother, so we’d keep each other accountable.",
     changed: "Gym, meals and sleep happen on time now, and my prime hours go to my projects. Not just a winter arc. Every arc.",
     summary:
-      "A shared-day accountability app for two brothers. The day is drawn as a transit map: the lines merge for what you do together and split for what you do alone.",
+      "An app my brother and I use to plan our days and keep each other accountable.",
     status: "In development",
     stack: ["Next.js 16", "TypeScript", "Supabase", "Postgres + RLS", "Tailwind v4", "PWA", "Vercel"],
     liveUrl: null,
     problem:
-      "My brother and I already live the same day — same train, same gym, same dinner. Habit apps treat that as two separate people ticking boxes. ARK makes the shared day visible, and every block only counts if you leave evidence behind.",
+      "I wanted to lock in this semester. Everyone talks about a winter arc, but I wanted something that keeps me disciplined through every arc. My brother and I share most of our day, same train and same gym, so I built it for both of us to keep each other accountable.",
     highlights: [
       "The day is drawn as a vertical transit line. Shared blocks merge into one trunk, solo blocks split into two branches, and a live ‘now’ marker moves down it",
-      "Proof of work closes each block: a gym photo, a note on what you read, or a sentence written in French",
+      "Each block only counts when you add proof, like a gym photo or a sentence in French.",
       "Shared blocks need both people to confirm",
       "Installable as a phone app",
     ],
     next: [
       "AI negotiator: describe what broke your day and an LLM proposes a revised plan",
       "Google Calendar sync",
-      "A weekly letter written from the week’s actual records",
+      "A weekly letter written from the week’s records.",
     ],
     note: "ARK is private to its two users, so there is no public demo.",
   },
@@ -122,16 +122,16 @@ export const projects: Project[] = [
     who: "Me, trying to make sense of my own stock trades.",
     changed: "I’m learning how markets move by building it. Next, it becomes my own trading research agent.",
     summary:
-      "Event-driven market research. ARES reads live financial headlines, spots when one resembles a kind of event that has happened before, and reports how the related stocks moved last time.",
+      "A stock research tool I’m building for myself, to learn how news moves the market.",
     status: "Working prototype",
     stack: ["Python", "ChromaDB", "Sentence Transformers", "yfinance", "Finnhub API"],
     liveUrl: null,
     problem:
-      "News moves stocks in recognizable patterns: a NASA budget approval, an AI chip earnings beat. I wanted to test whether a system could recognize the type of event from a headline and recall what happened the last few times.",
+      "I wanted to learn about stocks and trading, and building something is how I learn best. The question behind it: when news breaks, has something like it happened before, and how did the stocks move then?",
     highlights: [
       "An event memory of real historical events, with the 3-day and 10-day price moves that followed, verified against market data",
       "Hand-written ‘causal chain’ playbooks: which stocks react first, and which suppliers follow",
-      "Documents its own limits: small samples, chosen after the fact, not validated out-of-sample",
+      "It’s upfront about its limits. The samples are still small, and the results haven’t been tested on new data yet.",
     ],
     next: ["Paper-trading ledger", "Larger event memory", "Scheduled runs with emailed reports"],
     note: "A research project, not investment advice.",
@@ -142,18 +142,18 @@ export const projects: Project[] = [
     who: "A client’s support team, stuck in HubSpot’s default screens.",
     changed: "My first full-scale project, and my first time working with a real client.",
     summary:
-      "An AI support assistant and help-centre dashboard built on HubSpot for a client’s support team.",
+      "A support assistant and dashboard I built on HubSpot for a client’s support team.",
     status: "Client work",
     stack: ["React", "TypeScript", "Tailwind", "shadcn/ui", "FastAPI", "HubSpot API", "OAuth2"],
     liveUrl: null,
     problem:
-      "The client’s support team was working in HubSpot’s general-purpose interface. They needed one focused place to find customers, handle tickets, and get quick answers.",
+      "This was my first full project for a real client. Their support team was stuck in HubSpot’s default screens and needed something simpler for handling customers and tickets.",
     highlights: [
       "HubSpot sign-in",
       "Create, search, and triage tickets; priority and category edits sync back to HubSpot",
       "Contact and deal views with search, plus an assistant that looks up tickets and contacts on request",
       "Supports multiple support pipelines",
-      "Actively maintained and extended since mid-2025",
+      "I still work on it with the client.",
     ],
     note: "This is client work, so there is no public demo or screenshots.",
   },
@@ -210,5 +210,5 @@ export const today = {
   building: { text: "ARK, with my brother", project: "ark" },
   weekends: "Frames Stylist at Dumonde Eyecare. It’s where I learn how to talk to all kinds of people, and how to look after VIP clients.",
   // One plain line of tools actually used. No buzzword tags.
-  tools: "Python, TypeScript, JavaScript, Java, SQL, React, Next.js, Node.js, Express, FastAPI, Tailwind CSS, Postgres/Supabase, MongoDB, MySQL, Docker, Grafana, Splunk, Ansible, Vault, Vercel, LangChain, OpenAI API.",
+  tools: "Python, TypeScript, LangChain, OpenAI API, FastAPI, React, Next.js, Postgres/Supabase, Docker, ChromaDB, sentence-transformers, Ansible.",
 };
