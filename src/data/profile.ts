@@ -57,40 +57,24 @@ export interface Project {
   who: string | null;
   /** One line: what changed for them. Never how it works. null shows a TODO. */
   changed: string | null;
-  summary: string;
+  /** The intro under the title on the project page. null shows a TODO. */
+  summary: string | null;
   status: ProjectStatus;
   stack: string[];
   /** Public URL visitors can use. Leave null to hide the "Try it" button. */
   liveUrl: string | null;
-  problem: string;
+  /** Public source code. Leave out for private repos. */
+  codeUrl?: string;
+  /** "Why I built it". null shows a TODO. */
+  problem: string | null;
   /** "What it does": what someone can do with it. Never how it works. */
   highlights: string[];
   next?: string[];
   note?: string;
 }
 
+// Shown in this order, all the same size. Roughly biggest to smallest.
 export const projects: Project[] = [
-  {
-    slug: "tef-simulator",
-    name: "TEF Simulator",
-    who: "My brother, studying for his French exam.",
-    changed: "He practises under real exam conditions, and I’ll use it next. I’m learning French too.",
-    summary:
-      "A timed practice exam for the TEF Canada reading test, built for my brother while he studied for it.",
-    status: "Live",
-    stack: ["Node.js", "Express", "JavaScript", "pdf-parse", "Responsive UI"],
-    liveUrl: "https://tef-ce-simulator.onrender.com/exam.html?exam=exam-1",
-    problem:
-      "My brother was studying for the TEF Canada Compréhension écrite, and the practice material came as PDFs. Reading a PDF is nothing like sitting the real exam: no clock, no split screen, no score at the end. I built this so he could practise under exam conditions.",
-    highlights: [
-      "40 questions and a 60-minute timer, like the real exam, with the passage and questions side by side.",
-      "Question palette with flagging, so you can skip and come back like in the real test",
-      "Scores you right away with an estimated NCLC level, and explains every answer after.",
-      "Six mock exams",
-      "Works on phones",
-    ],
-    next: ["More mock exams", "Listening comprehension section"],
-  },
   {
     slug: "ark",
     name: "ARK",
@@ -117,6 +101,27 @@ export const projects: Project[] = [
     note: "ARK is private to its two users, so there is no public demo.",
   },
   {
+    slug: "siza",
+    name: "SIZA",
+    who: "A client’s support team, stuck in HubSpot’s default screens.",
+    changed: "My first full-scale project, and my first time working with a real client.",
+    summary:
+      "A support assistant and dashboard I built on HubSpot for a client’s support team.",
+    status: "Client work",
+    stack: ["React", "TypeScript", "Tailwind", "shadcn/ui", "FastAPI", "HubSpot API", "OAuth2"],
+    liveUrl: null,
+    problem:
+      "This was my first full project for a real client. Their support team was stuck in HubSpot’s default screens and needed something simpler for handling customers and tickets.",
+    highlights: [
+      "HubSpot sign-in",
+      "Create, search, and triage tickets; priority and category edits sync back to HubSpot",
+      "Contact and deal views with search, plus an assistant that looks up tickets and contacts on request",
+      "Supports multiple support pipelines",
+      "I still work on it with the client.",
+    ],
+    note: "This is client work, so there is no public demo or screenshots.",
+  },
+  {
     slug: "ares",
     name: "ARES 2.0",
     who: "Me, trying to make sense of my own stock trades.",
@@ -137,25 +142,43 @@ export const projects: Project[] = [
     note: "A research project, not investment advice.",
   },
   {
-    slug: "siza",
-    name: "SIZA",
-    who: "A client’s support team, stuck in HubSpot’s default screens.",
-    changed: "My first full-scale project, and my first time working with a real client.",
-    summary:
-      "A support assistant and dashboard I built on HubSpot for a client’s support team.",
-    status: "Client work",
-    stack: ["React", "TypeScript", "Tailwind", "shadcn/ui", "FastAPI", "HubSpot API", "OAuth2"],
+    slug: "website",
+    name: "This website",
+    who: "Me, with a resume link that led to a class assignment instead of my actual work.",
+    changed: "Recruiters can see what I’ve built, even the projects I can’t open-source, and reach me in one step.",
+    summary: "My portfolio, and the link on my resume.",
+    status: "Live",
+    stack: ["React", "TypeScript", "Vite", "Tailwind CSS", "Lenis", "Web3Forms", "GitHub Pages"],
     liveUrl: null,
+    codeUrl: "https://github.com/Kush-Morjaria/kush-portfolio-nexus",
     problem:
-      "This was my first full project for a real client. Their support team was stuck in HubSpot’s default screens and needed something simpler for handling customers and tickets.",
+      "It started as an ePortfolio for a co-op course, built with Lovable. I wanted something I’d actually put on my resume, so I rebuilt it around the projects I’ve worked on and the people I built them for.",
     highlights: [
-      "HubSpot sign-in",
-      "Create, search, and triage tickets; priority and category edits sync back to HubSpot",
-      "Contact and deal views with search, plus an assistant that looks up tickets and contacts on request",
-      "Supports multiple support pipelines",
-      "I still work on it with the client.",
+      "Shows every project, including the ones whose code is private",
+      "Lets you message me straight from the page",
+      "Works on a phone as well as a laptop",
     ],
-    note: "This is client work, so there is no public demo or screenshots.",
+  },
+  {
+    slug: "tef-simulator",
+    name: "TEF Simulator",
+    who: "My brother, studying for his French exam.",
+    changed: "He practises under real exam conditions, and I’ll use it next. I’m learning French too.",
+    summary:
+      "A timed practice exam for the TEF Canada reading test, built for my brother while he studied for it.",
+    status: "Live",
+    stack: ["Node.js", "Express", "JavaScript", "pdf-parse", "Responsive UI"],
+    liveUrl: "https://tef-ce-simulator.onrender.com/exam.html?exam=exam-1",
+    problem:
+      "My brother was studying for the TEF Canada Compréhension écrite, and the practice material came as PDFs. Reading a PDF is nothing like sitting the real exam: no clock, no split screen, no score at the end. I built this so he could practise under exam conditions.",
+    highlights: [
+      "40 questions and a 60-minute timer, like the real exam, with the passage and questions side by side.",
+      "Question palette with flagging, so you can skip and come back like in the real test",
+      "Scores you right away with an estimated NCLC level, and explains every answer after.",
+      "Six mock exams",
+      "Works on phones",
+    ],
+    next: ["More mock exams", "Listening comprehension section"],
   },
 ];
 

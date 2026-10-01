@@ -53,16 +53,24 @@ export default function ProjectDetail() {
         <header className="mt-xl">
           <StatusBadge status={project.status} />
           <h1 className="mt-sm text-display-xl">{project.name}</h1>
-          <p className="mt-md max-w-3xl font-display text-lead text-quiet">{project.summary}</p>
-          {project.liveUrl && (
-            <a
-              href={project.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="link-amber mt-lg inline-block text-body font-medium"
-            >
-              Try it →
-            </a>
+          {project.summary ? (
+            <p className="mt-md max-w-3xl font-display text-lead text-quiet">{project.summary}</p>
+          ) : (
+            <Todo className="mt-md max-w-3xl">a one-line summary of the project.</Todo>
+          )}
+          {(project.liveUrl || project.codeUrl) && (
+            <div className="mt-lg flex flex-wrap gap-x-lg gap-y-xs">
+              {project.liveUrl && (
+                <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="link-amber text-body font-medium">
+                  Try it →
+                </a>
+              )}
+              {project.codeUrl && (
+                <a href={project.codeUrl} target="_blank" rel="noopener noreferrer" className="link-amber text-body font-medium">
+                  Code →
+                </a>
+              )}
+            </div>
           )}
         </header>
       </Reveal>
@@ -91,17 +99,25 @@ export default function ProjectDetail() {
         </Block>
 
         <Block label="Why I built it">
-          <p className="text-body text-quiet">{project.problem}</p>
+          {project.problem ? (
+            <p className="text-body text-quiet">{project.problem}</p>
+          ) : (
+            <Todo>why you built it, in a few sentences.</Todo>
+          )}
         </Block>
 
         <Block label="What it does">
-          <ul className="divide-y divide-rule">
-            {project.highlights.map((item) => (
-              <li key={item} className="py-xs text-body first:pt-0 last:pb-0">
-                {item}
-              </li>
-            ))}
-          </ul>
+          {project.highlights.length > 0 ? (
+            <ul className="divide-y divide-rule">
+              {project.highlights.map((item) => (
+                <li key={item} className="py-xs text-body first:pt-0 last:pb-0">
+                  {item}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <Todo>what someone can do with it, one line each. Never how it works.</Todo>
+          )}
         </Block>
 
         {project.next && (
