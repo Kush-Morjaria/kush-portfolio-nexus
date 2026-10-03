@@ -27,11 +27,11 @@ export const profile = {
     // The single config spot for the contact form. Web3Forms access keys are meant to be public:
     // the key only lets someone send mail to this inbox, nothing else.
     web3formsKey: "5544aa86-ada2-400a-ae7d-8f0ff778c87a",
-    topics: ["Coffee chat", "Opportunity", "Project idea", "Something else"],
+    topics: ["Coffee chat", "Opportunity", "Project idea", "Resume request", "Something else"],
+    // The resume isn't public: the Today section links here with this topic already chosen.
+    resumeTopic: "Resume request",
     fastest: "This form is the fastest way to reach me.",
   },
-  // Set to e.g. "KushMorjaria-Resume.pdf" (placed in /public) once the updated resume is ready.
-  resumeUrl: null as string | null,
   socials: {
     github: "https://github.com/Kush-Morjaria",
     linkedin: "https://www.linkedin.com/in/kush-morjaria",

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Check, ChevronDown, Copy } from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
 import { SectionFlag } from "@/components/SectionFlag";
@@ -63,6 +64,14 @@ const CopyEmail = () => {
 export const ContactSection = () => {
   const [status, setStatus] = useState<Status>({ state: "idle" });
   const sending = status.state === "sending";
+  const [topic, setTopic] = useState("");
+
+  // A link elsewhere on the site can arrive with a topic already chosen (e.g. "Want my resume? Ask me →").
+  const location = useLocation();
+  useEffect(() => {
+    const requested = (location.state as { topic?: string } | null)?.topic;
+    if (requested && contact.topics.includes(requested)) setTopic(requested);
+  }, [location.key, location.state]);
 
   const submit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -93,6 +102,7 @@ export const ContactSection = () => {
 
       if (response.ok && result?.success) {
         form.reset();
+        setTopic("");
         setStatus({ state: "sent", email });
       } else {
         setStatus({
@@ -160,7 +170,8 @@ export const ContactSection = () => {
                   id="contact-topic"
                   name="topic"
                   required
-                  defaultValue=""
+                  value={topic}
+                  onChange={(event) => setTopic(event.target.value)}
                   disabled={sending}
                   className={cn(field, "appearance-none pr-xl invalid:text-quiet")}
                 >

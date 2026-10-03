@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import { Reveal } from "@/components/motion/Reveal";
 import { SectionFlag } from "@/components/SectionFlag";
-import { education, experience, profile, today } from "@/data/profile";
+import { education, experience, profile, stations, today } from "@/data/profile";
 
 const current = experience.find((r) => r.current)!;
 const before = experience.filter((r) => !r.current);
+const contactStation = stations.find((s) => s.section === "contact")!;
 
 // A labelled row: mono key on the left, the fact on the right (stacked on phones).
 const Row = ({ label, children }: { label: string; children: React.ReactNode }) => (
@@ -44,6 +45,16 @@ export const TodaySection = () => (
             <p className="font-display text-lead">{today.weekends}</p>
           </Row>
         </dl>
+        <p className="mt-md text-small text-quiet">
+          Want my resume?{" "}
+          <Link
+            to={{ pathname: "/", hash: `#${contactStation.section}` }}
+            state={{ topic: profile.contact.resumeTopic }}
+            className="link-amber"
+          >
+            Ask me →
+          </Link>
+        </p>
       </Reveal>
 
       <Reveal delay={120}>
