@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Menu } from "lucide-react";
+import { ArrowRight, Download, Menu } from "lucide-react";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { SocialLinks } from "@/components/SocialLinks";
 import { KMConstellation } from "@/components/KMConstellation";
@@ -8,6 +8,7 @@ import { profile, stations } from "@/data/profile";
 import { useReachedStation } from "@/lib/station-progress";
 import { cn } from "@/lib/utils";
 
+const resumeHref = `${import.meta.env.BASE_URL}${profile.resumeUrl}`;
 const stationLabel = (i: number) => `${stations[i].code} ${stations[i].name}`;
 
 /**
@@ -34,6 +35,9 @@ export const Header = () => {
             {profile.location} <span className="px-xs">·</span> Last updated{" "}
             <span className="text-ink">{profile.lastUpdated}</span>
           </p>
+          <a href={resumeHref} download className="label link-amber inline-flex items-center gap-2xs">
+            <Download className="h-3.5 w-3.5" /> Resume (PDF)
+          </a>
         </div>
 
         {/* Below lg: menu with the same stations as the rail. */}
@@ -64,6 +68,9 @@ export const Header = () => {
                 ))}
               </ol>
             </nav>
+            <a href={resumeHref} download className="label link-amber inline-flex items-center gap-2xs">
+              <Download className="h-3.5 w-3.5" /> Resume (PDF)
+            </a>
             <SocialLinks className="mt-auto -ml-xs flex-wrap" />
           </SheetContent>
         </Sheet>

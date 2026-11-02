@@ -5,7 +5,7 @@ export const profile = {
   role: "Technical Systems Analyst",
   location: "Toronto, ON",
   // Shown in the masthead. Edit by hand whenever you update the site — it is never generated.
-  lastUpdated: "September 2026",
+  lastUpdated: "November 2026",
   hero: {
     headline: "Most of what I build started as a problem someone next to me had.",
     // Set in italic inside the headline.
@@ -13,7 +13,7 @@ export const profile = {
     // The three problems under the headline, by project slug. The text is each project's `who` line,
     // and each links to its project.
     sub: ["siza", "tef-simulator", "ares"],
-    note: "CS at York, graduating 2027.",
+    note: "B.Sc. Computer Science at York, graduating 2027.",
     // Where I'm from and the languages I speak: three short lines under the hero.
     about: [
       "I grew up in Mozambique, where you learned to make things work with what you had.",
@@ -22,6 +22,19 @@ export const profile = {
     ],
     cta: "What’s the problem next to you?",
   },
+  // The ePortfolio intro the co-op course asks for. Shown under the hero, in station 01.
+  intro: {
+    program: "B.Sc. Computer Science, Lassonde School of Engineering, York University",
+    programDates: "Sept 2023 – April 2027",
+    love: "It gives me the fundamentals behind the tools I use every day, and room to build my own projects alongside it.",
+    coop: "Returning to RBC for three terms in a row taught me how software works inside a large company: building things other people depend on, getting work through security reviews, and being trusted with more each term.",
+    careerGoal: "To become an AI engineer, building LLM systems that people rely on every day.",
+    // public/<file>, or null until the video exists. Made from the site's own content (no voice).
+    video: "about-me.mp4" as string | null,
+    videoPoster: "about-me-poster.jpg",
+  },
+  // Downloadable resume in /public. The contact form's "Resume request" stays as the other way to ask.
+  resumeUrl: "Kush_Morjaria_Resume.pdf",
   email: "kushmorjaria567@gmail.com",
   contact: {
     // The single config spot for the contact form. Web3Forms access keys are meant to be public:
@@ -69,6 +82,14 @@ export interface Project {
   problem: string | null;
   /** "What it does": what someone can do with it. Never how it works. */
   highlights: string[];
+  /** My specific role and contributions. */
+  role: string;
+  /** Relevant technical skills and languages. */
+  skills: string[];
+  /** One or two lines on methods, resume-level detail. */
+  methods: string;
+  /** Describes the picture in src/assets/real/<slug>.*: used as its alt text and the label under it. */
+  photoCaption?: string;
   next?: string[];
   note?: string;
 }
@@ -87,6 +108,10 @@ export const projects: Project[] = [
     liveUrl: null,
     problem:
       "I wanted to lock in this semester. Everyone talks about a winter arc, but I wanted something that keeps me disciplined through every arc. My brother and I share most of our day, same train and same gym, so I built it for both of us to keep each other accountable.",
+    photoCaption: "ARK on my phone.",
+    role: "Sole developer. My brother is the second user and tests it every day.",
+    skills: ["TypeScript", "Next.js", "PostgreSQL", "Supabase", "Progressive web apps", "Unit testing"],
+    methods: "Built in stages, each one deployed and used before starting the next. 119 unit tests cover the scheduling logic.",
     highlights: [
       "The day is drawn as a vertical transit line. Shared blocks merge into one trunk, solo blocks split into two branches, and a live ‘now’ marker moves down it",
       "Each block only counts when you add proof, like a gym photo or a sentence in French.",
@@ -112,6 +137,10 @@ export const projects: Project[] = [
     liveUrl: null,
     problem:
       "This was my first full project for a real client. Their support team was stuck in HubSpot’s default screens and needed something simpler for handling customers and tickets.",
+    photoCaption: "How SIZA’s pieces connect. A diagram, not a screenshot: the client’s data stays private.",
+    role: "Freelance full-stack developer: I built it and still maintain it for the client.",
+    skills: ["React", "TypeScript", "Python", "FastAPI", "REST APIs", "OAuth2"],
+    methods: "Live in production for 14+ months, with security audits and fixes as the client’s needs change.",
     highlights: [
       "HubSpot sign-in",
       "Create, search, and triage tickets; priority and category edits sync back to HubSpot",
@@ -133,6 +162,10 @@ export const projects: Project[] = [
     liveUrl: null,
     problem:
       "I wanted to learn about stocks and trading, and building something is how I learn best. The question behind it: when news breaks, has something like it happened before, and how did the stocks move then?",
+    photoCaption: "Real output from ARES’s alert log: two news events matched to past ones.",
+    role: "Sole developer.",
+    skills: ["Python", "pandas", "ChromaDB", "sentence-transformers", "yfinance"],
+    methods: "Checked against real historical price moves, with a regression test on the event matching.",
     highlights: [
       "An event memory of real historical events, with the 3-day and 10-day price moves that followed, verified against market data",
       "Hand-written ‘causal chain’ playbooks: which stocks react first, and which suppliers follow",
@@ -153,6 +186,10 @@ export const projects: Project[] = [
     codeUrl: "https://github.com/Kush-Morjaria/kush-portfolio-nexus",
     problem:
       "It started as an ePortfolio for a co-op course, built with Lovable. I wanted something I’d actually put on my resume, so I rebuilt it around the projects I’ve worked on and the people I built them for.",
+    photoCaption: "This website’s home page.",
+    role: "Designer and developer.",
+    skills: ["React", "TypeScript", "Tailwind CSS", "Vite", "Accessibility"],
+    methods: "Started from a design system, then designed, reviewed and tested each section on desktop and phone.",
     highlights: [
       "Shows every project, including the ones whose code is private",
       "Lets you message me straight from the page",
@@ -171,6 +208,10 @@ export const projects: Project[] = [
     liveUrl: "https://tef-ce-simulator.onrender.com/exam.html?exam=exam-1",
     problem:
       "My brother was studying for the TEF Canada Compréhension écrite, and the practice material came as PDFs. Reading a PDF is nothing like sitting the real exam: no clock, no split screen, no score at the end. I built this so he could practise under exam conditions.",
+    photoCaption: "The live simulator, on the first question of a mock exam.",
+    role: "Sole developer.",
+    skills: ["JavaScript", "Node.js", "Express", "Responsive design"],
+    methods: "240 questions across 6 mock exams, converted from practice PDFs into structured data and checked by hand.",
     highlights: [
       "40 questions and a 60-minute timer, like the real exam, with the passage and questions side by side.",
       "Question palette with flagging, so you can skip and come back like in the real test",

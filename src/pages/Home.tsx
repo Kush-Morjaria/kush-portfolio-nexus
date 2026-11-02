@@ -1,4 +1,5 @@
 import { Hero } from "@/components/Hero";
+import { IntroSection } from "@/components/IntroSection";
 import { ProjectsSection } from "@/components/ProjectsSection";
 import { TodaySection } from "@/components/TodaySection";
 import { ContactSection } from "@/components/ContactSection";
@@ -8,6 +9,7 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <IntroSection />
       <ProjectsSection />
       <TodaySection />
       <ContactSection />

@@ -77,7 +77,14 @@ export default function ProjectDetail() {
 
       {photo && (
         <Reveal className="mt-xl">
-          <img src={photo} alt={`${project.name}, in use`} className="w-full border-hair border-rule object-cover" />
+          <figure>
+            <img
+              src={photo}
+              alt={project.photoCaption ?? project.name}
+              className="w-full border-hair border-rule object-cover"
+            />
+            {project.photoCaption && <figcaption className="label mt-sm">{project.photoCaption}</figcaption>}
+          </figure>
         </Reveal>
       )}
 
@@ -96,6 +103,10 @@ export default function ProjectDetail() {
           ) : (
             <Todo>one line on what changed for them.</Todo>
           )}
+        </Block>
+
+        <Block label="My role">
+          <p className="font-display text-title font-normal">{project.role}</p>
         </Block>
 
         <Block label="Why I built it">
@@ -131,6 +142,14 @@ export default function ProjectDetail() {
             </ul>
           </Block>
         )}
+
+        <Block label="Skills">
+          <p className="text-body">{project.skills.join(", ")}.</p>
+        </Block>
+
+        <Block label="Methods">
+          <p className="text-body text-quiet">{project.methods}</p>
+        </Block>
 
         <Block label="Built with">
           <p className="text-body text-quiet">{project.stack.join(", ")}.</p>

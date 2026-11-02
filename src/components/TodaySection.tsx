@@ -47,12 +47,16 @@ export const TodaySection = () => (
         </dl>
         <p className="mt-md text-small text-quiet">
           Want my resume?{" "}
+          <a href={`${import.meta.env.BASE_URL}${profile.resumeUrl}`} download className="link-amber">
+            Download the PDF
+          </a>{" "}
+          or{" "}
           <Link
             to={{ pathname: "/", hash: `#${contactStation.section}` }}
             state={{ topic: profile.contact.resumeTopic }}
             className="link-amber"
           >
-            Ask me →
+            ask me →
           </Link>
         </p>
       </Reveal>
